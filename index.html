@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tunde Modicious Oye | SRC President '26 | KNUST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brown:      #5a2d0c;
+      --dark-brown: #2e1404;
+      --deep:       #1a0a00;
+      --gold:       #c8860a;
+      --gold-light: #f0a830;
+      --gold-pale:  #fde8b0;
+      --red:        #c0161a;
+      --red-dark:   #8a0f12;
+      --white:      #fff8f0;
+      --cream:      #f5e6d3;
+      --muted:      rgba(245,230,211,.55);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Oswald', sans-serif; background: var(--deep); color: var(--white); overflow-x: hidden; cursor: none; }
+
+    /* CURSOR */
+    #cur { width:16px; height:16px; border:2px solid var(--gold-light); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .12s, background .12s; mix-blend-mode:difference; }
+    #cur.big { transform:translate(-50%,-50%) scale(3); background:rgba(240,168,48,.15); }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:14px 5%; background:rgba(26,10,0,.92); backdrop-filter:blur(16px); border-bottom:1px solid rgba(200,134,10,.25); animation:slideDown .7s ease; }
+    @keyframes slideDown { from{transform:translateY(-100%);opacity:0} to{transform:none;opacity:1} }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:4px; color:var(--gold-light); }
+    .nav-logo em { color:var(--red); font-style:normal; }
+    nav ul { display:flex; gap:26px; list-style:none; }
+    nav ul a { text-decoration:none; color:var(--cream); font-size:.78rem; letter-spacing:2.5px; text-transform:uppercase; transition:color .3s; position:relative; padding-bottom:4px; }
+    nav ul a::after { content:''; position:absolute; bottom:0; left:0; right:100%; height:1.5px; background:var(--gold-light); transition:right .3s; }
+    nav ul a:hover { color:var(--gold-light); }
+    nav ul a:hover::after { right:0; }
+    .nav-cta { background:var(--red); color:#fff; padding:8px 20px; font-size:.75rem; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:background .3s; clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%); }
+    .nav-cta:hover { background:var(--gold); color:var(--deep); }
+
+    /* HERO */
+    .hero { position:relative; width:100%; height:100vh; overflow:hidden; }
+    .slides { display:flex; height:100%; }
+    .slide { min-width:100%; height:100%; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .slide-1 { background:radial-gradient(ellipse at 60% 40%, #7a3a10 0%, #3a1a05 50%, #1a0a00 100%); }
+    .slide-2 { background:radial-gradient(ellipse at 40% 60%, #8a1010 0%, #3a0505 50%, #0d0000 100%); }
+    .slide-3 { background:radial-gradient(ellipse at 50% 30%, #5a3a05 0%, #2e1404 50%, #0a0500 100%); }
+    .slide-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.18; filter:sepia(80%) saturate(1.8); }
+    .slide-content { position:relative; z-index:3; text-align:center; padding:20px; max-width:900px; }
+    .hero-eyebrow { display:inline-block; font-size:.75rem; letter-spacing:5px; color:var(--gold-light); border:1px solid rgba(200,134,10,.5); padding:5px 18px; margin-bottom:22px; opacity:0; transform:translateY(16px); }
+    .slide.active .hero-eyebrow { animation:up .5s .15s forwards; }
+    .hero-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.8rem,11vw,10rem); line-height:.9; letter-spacing:3px; color:var(--white); opacity:0; transform:translateY(40px); }
+    .hero-name .gold { color:var(--gold-light); }
+    .hero-name .red  { color:var(--red); }
+    .slide.active .hero-name { animation:up .7s .3s forwards; }
+    .hero-mantra { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.4rem,3.5vw,2.8rem); letter-spacing:7px; color:var(--red); margin-top:14px; opacity:0; }
+    .slide.active .hero-mantra { animation:up .6s .55s forwards; }
+    .hero-sub { font-size:.85rem; color:var(--cream); letter-spacing:2px; margin-top:10px; opacity:0; }
+    .slide.active .hero-sub { animation:up .5s .7s forwards; }
+    .hero-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px; opacity:0; }
+    .slide.active .hero-btns { animation:up .5s .85s forwards; }
+    .btn-primary { background:var(--red); color:#fff; padding:13px 32px; font-size:.85rem; letter-spacing:3px; text-transform:uppercase; text-decoration:none; clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); transition:background .3s,transform .2s; display:inline-block; }
+    .btn-primary:hover { background:var(--gold); color:var(--deep); transform:scale(1.05); }
+    .btn-outline { border:1.5px solid var(--gold); color:var(--gold-light); padding:12px 30px; font-size:.85rem; letter-spacing:3px; text-transform:uppercase; text-decoration:none; transition:background .3s,color .3s; display:inline-block; }
+    .btn-outline:hover { background:var(--gold); color:var(--deep); }
+    @keyframes up { to{opacity:1;transform:translateY(0)} }
+
+    .slider-arrows { position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; padding:0 24px; transform:translateY(-50%); z-index:10; pointer-events:none; }
+    .arr { width:46px; height:46px; border:1.5px solid rgba(200,134,10,.6); color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:1.3rem; cursor:pointer; pointer-events:all; background:rgba(26,10,0,.5); transition:background .3s,color .3s; }
+    .arr:hover { background:var(--gold); color:var(--deep); }
+    .slider-dots { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10; }
+    .dot { width:9px; height:9px; border-radius:50%; background:rgba(255,248,240,.25); border:1px solid var(--gold); cursor:pointer; transition:background .3s,transform .3s; }
+    .dot.active { background:var(--gold-light); transform:scale(1.5); }
+    .prog { position:absolute; bottom:0; left:0; height:3px; background:linear-gradient(90deg,var(--red),var(--gold-light)); width:0; z-index:10; }
+    .prog.go { transition:width 5s linear; width:100%; }
+
+    .spin-badge { position:absolute; top:110px; right:5%; width:100px; height:100px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--red); clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0 75%,0 25%); font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:2px; color:#fff; text-align:center; animation:spin 9s linear infinite; z-index:5; line-height:1.1; }
+    .spin-badge small { font-size:.65rem; letter-spacing:1px; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    .particles { position:absolute; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+    .p { position:absolute; border-radius:50%; background:var(--gold); animation:float var(--d,6s) var(--dl,0s) infinite ease-in-out alternate; }
+    @keyframes float { from{transform:translateY(0) scale(1);opacity:.15} to{transform:translateY(-30px) scale(1.5);opacity:.4} }
+
+    /* TICKER */
+    .ticker-wrap { background:var(--red); padding:9px 0; overflow:hidden; white-space:nowrap; }
+    .ticker { display:inline-block; animation:tick 22s linear infinite; font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:4px; color:#fff; }
+    @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tick-item { display:inline-block; margin:0 36px; }
+    .tick-dot { color:var(--gold-light); }
+
+    /* SECTIONS */
+    section { padding:100px 5%; position:relative; }
+    .lbl { font-size:.72rem; letter-spacing:5px; text-transform:uppercase; color:var(--gold-light); margin-bottom:8px; }
+    .stitle { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.6rem,6vw,5rem); line-height:1; color:var(--white); }
+    .stitle .r { color:var(--red); }
+    .stitle .g { color:var(--gold-light); }
+    .divl { width:56px; height:3px; background:linear-gradient(90deg,var(--red),var(--gold-light)); margin:14px 0 30px; }
+    .divc { margin:14px auto 30px; }
+
+    /* ABOUT */
+    #about { background:var(--brown); }
+    .about-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:70px; align-items:center; margin-top:50px; }
+    .img-wrap { position:relative; }
+    .img-wrap img { width:100%; display:block; border-radius:2px; filter:sepia(25%) saturate(1.5) contrast(1.05); }
+    .img-frame { position:absolute; inset:-14px; border:2px solid var(--gold); border-radius:2px; z-index:-1; }
+    .img-cap { position:absolute; bottom:-18px; right:-18px; background:var(--red); color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1.3rem; padding:16px 20px; letter-spacing:2px; line-height:1.1; text-align:center; box-shadow:0 8px 30px rgba(0,0,0,.6); }
+    .about-text p { font-family:'Lora',serif; color:var(--cream); font-size:1rem; line-height:1.85; margin-bottom:18px; }
+    .about-text strong { color:var(--gold-light); }
+    .scripture { border-left:3px solid var(--gold); padding:14px 18px; margin:20px 0; background:rgba(200,134,10,.07); font-family:'Lora',serif; font-style:italic; color:var(--gold-pale); font-size:.95rem; line-height:1.7; }
+    .scripture cite { display:block; margin-top:6px; font-style:normal; font-size:.78rem; letter-spacing:2px; color:var(--gold); font-family:'Oswald',sans-serif; }
+    .facts { display:flex; gap:28px; flex-wrap:wrap; margin-top:30px; }
+    .fact { border-left:3px solid var(--gold); padding-left:14px; }
+    .fn { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--gold-light); }
+    .fl { font-size:.75rem; color:var(--cream); letter-spacing:1px; line-height:1.4; }
+
+    /* SPEECH */
+    #speech { background:var(--dark-brown); }
+    .speech-wrap { max-width:860px; margin:50px auto 0; }
+    .speech-p { font-family:'Lora',serif; font-size:1.05rem; line-height:1.9; color:var(--cream); margin-bottom:22px; }
+    .speech-p strong { color:var(--gold-light); }
+    .godfidence-box { background:linear-gradient(135deg,rgba(192,22,26,.12),rgba(200,134,10,.12)); border:1px solid rgba(200,134,10,.35); padding:36px 40px; margin:40px 0; position:relative; }
+    .godfidence-box::before { content:'G'; position:absolute; top:-20px; left:30px; font-family:'Bebas Neue',sans-serif; font-size:5rem; color:var(--gold); opacity:.1; line-height:1; }
+    .godfidence-title { font-family:'Bebas Neue',sans-serif; font-size:2.4rem; letter-spacing:4px; color:var(--gold-light); margin-bottom:4px; }
+    .godfidence-def { font-size:.78rem; letter-spacing:3px; color:var(--gold); margin-bottom:16px; font-family:'Oswald',sans-serif; }
+    .godfidence-box p { font-family:'Lora',serif; color:var(--cream); line-height:1.85; }
+    .newton-quote { text-align:center; padding:50px 20px; }
+    .newton-quote blockquote { font-family:'Lora',serif; font-size:clamp(1.1rem,2.5vw,1.6rem); font-style:italic; color:var(--gold-pale); line-height:1.7; position:relative; display:inline-block; }
+    .newton-quote blockquote::before { content:'\201C'; font-size:5rem; color:var(--gold); opacity:.3; position:absolute; top:-20px; left:-10px; font-family:serif; line-height:1; }
+    .newton-quote cite { display:block; margin-top:16px; font-style:normal; font-size:.78rem; letter-spacing:3px; color:var(--gold); font-family:'Oswald',sans-serif; }
+
+    /* REBIRTH */
+    #rebirth { background:var(--deep); text-align:center; }
+    .rebirth-word { font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,16vw,13rem); color:transparent; -webkit-text-stroke:2px var(--gold); letter-spacing:10px; line-height:1; position:relative; display:inline-block; overflow:hidden; }
+    .rebirth-word::after { content:'REBIRTH'; position:absolute; inset:0; color:var(--gold-light); clip-path:inset(0 100% 0 0); transition:clip-path 1.8s cubic-bezier(.77,0,.18,1); }
+    .rebirth-word.on::after { clip-path:inset(0 0% 0 0); }
+    .rebirth-sub { font-family:'Oswald',sans-serif; font-size:1rem; letter-spacing:4px; color:var(--gold); margin:12px 0 30px; text-transform:uppercase; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:22px; margin-top:60px; }
+    .card { background:rgba(200,134,10,.07); border:1px solid rgba(200,134,10,.2); padding:30px 24px; position:relative; overflow:hidden; transition:transform .35s,border-color .35s,box-shadow .35s; text-align:left; }
+    .card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--red); }
+    .card:hover { transform:translateY(-8px); border-color:var(--gold); box-shadow:0 20px 50px rgba(0,0,0,.5); }
+    .card-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:rgba(200,134,10,.15); line-height:1; margin-bottom:8px; }
+    .card-icon { font-size:1.8rem; margin-bottom:10px; }
+    .card-title { font-size:1.1rem; letter-spacing:2px; color:var(--gold-light); margin-bottom:10px; text-transform:uppercase; }
+    .card p { font-family:'Lora',serif; color:var(--cream); font-size:.92rem; line-height:1.7; }
+
+    /* STATS */
+    .stats-band { background:var(--red); padding:50px 5%; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:30px; }
+    .stat { text-align:center; }
+    .stat-num { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:#fff; letter-spacing:2px; }
+    .stat-label { font-size:.72rem; letter-spacing:3px; color:rgba(255,255,255,.75); text-transform:uppercase; margin-top:4px; }
+
+    /* GALLERY */
+    #gallery { background:var(--brown); }
+    .gal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:40px; }
+    .gi { overflow:hidden; position:relative; background:rgba(0,0,0,.3); border:1px solid rgba(200,134,10,.15); min-height:200px; }
+    .gi:first-child { grid-column:span 2; grid-row:span 2; }
+    .gi img { width:100%; height:100%; object-fit:cover; filter:sepia(35%) saturate(1.4); transition:transform .6s,filter .6s; display:block; }
+    .gi:hover img { transform:scale(1.1); filter:sepia(0%) saturate(1.6); }
+    .gi-ov { position:absolute; inset:0; background:linear-gradient(to top,rgba(26,10,0,.9) 0%,transparent 55%); opacity:0; transition:opacity .4s; display:flex; align-items:flex-end; padding:16px; }
+    .gi:hover .gi-ov { opacity:1; }
+    .gi-ov span { font-size:.78rem; letter-spacing:2px; color:var(--gold-light); text-transform:uppercase; }
+
+    /* SOCIALS */
+    #socials { background:var(--dark-brown); }
+    .socials-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:44px; }
+    .soc { display:flex; align-items:center; gap:16px; padding:18px 22px; text-decoration:none; color:#fff; font-size:.9rem; letter-spacing:1.5px; font-weight:600; transition:transform .25s,box-shadow .25s; border-radius:3px; position:relative; overflow:hidden; }
+    .soc::before { content:''; position:absolute; inset:0; background:rgba(255,255,255,.08); transform:translateX(-100%); transition:transform .35s; }
+    .soc:hover::before { transform:translateX(0); }
+    .soc:hover { transform:translateY(-4px); box-shadow:0 14px 40px rgba(0,0,0,.5); }
+    .soc-icon { font-size:1.6rem; min-width:32px; }
+    .soc-info { display:flex; flex-direction:column; gap:3px; }
+    .soc-name { font-size:.68rem; opacity:.75; letter-spacing:1px; text-transform:uppercase; }
+    .soc-handle { font-size:.92rem; }
+    .soc-facebook  { background:#1877f2; }
+    .soc-x         { background:#000000; border:1px solid #2a2a2a; }
+    .soc-tiktok    { background:linear-gradient(135deg,#010101 40%,#161616 60%,#1a1a2e 100%); border:1px solid #69c9d0; }
+    .soc-snapchat  { background:#fffc00; color:#111; }
+    .soc-snapchat .soc-name, .soc-snapchat .soc-handle { color:#111; }
+    .soc-linkedin  { background:#0a66c2; }
+    .soc-whatsapp  { background:#25d366; }
+
+    /* CONTACT */
+    #contact { background:var(--deep); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-top:50px; }
+    .contact-text p { font-family:'Lora',serif; color:var(--cream); line-height:1.85; font-size:1rem; margin-bottom:20px; }
+    .contact-text strong { color:var(--gold-light); }
+    .ph-btn { display:inline-flex; align-items:center; gap:12px; background:rgba(37,211,102,.12); border:1.5px solid #25d366; color:#fff; padding:15px 28px; font-size:1rem; letter-spacing:2px; text-decoration:none; margin-top:8px; transition:background .3s; }
+    .ph-btn:hover { background:#25d366; }
+    .anthem { background:linear-gradient(135deg,rgba(200,134,10,.08),rgba(192,22,26,.08)); border:1px solid rgba(200,134,10,.25); padding:28px 32px; margin-top:30px; }
+    .anthem p { font-family:'Lora',serif; font-style:italic; color:var(--gold-pale); line-height:1.7; font-size:.95rem; }
+    .anthem cite { display:block; margin-top:10px; font-style:normal; font-size:.75rem; letter-spacing:2px; color:var(--gold); font-family:'Oswald',sans-serif; }
+    .why-box { background:rgba(200,134,10,.07); border:1px solid rgba(200,134,10,.2); padding:28px 24px; }
+    .why-box .why-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--gold-light); letter-spacing:3px; margin-bottom:16px; }
+    .why-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .why-list li { display:flex; gap:10px; align-items:flex-start; font-family:'Lora',serif; color:var(--cream); font-size:.93rem; line-height:1.6; }
+    .why-list li span.star { color:var(--gold); margin-top:3px; flex-shrink:0; }
+
+    /* QUOTE BANNER */
+    .qbanner { background:linear-gradient(135deg,var(--red-dark),var(--red)); padding:60px 5%; text-align:center; position:relative; overflow:hidden; }
+    .qbanner::before { content:'\275D'; position:absolute; font-size:14rem; color:rgba(255,255,255,.04); top:-40px; left:10px; font-family:serif; line-height:1; }
+    .qbanner blockquote { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,5vw,4rem); letter-spacing:4px; color:#fff; position:relative; z-index:1; }
+    .qbanner cite { display:block; margin-top:12px; font-family:'Oswald',sans-serif; font-size:.9rem; letter-spacing:3px; color:rgba(255,255,255,.7); font-style:normal; }
+
+    /* CHATBOT */
+    #chat-btn { position:fixed; bottom:28px; right:28px; z-index:500; width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--red),var(--gold)); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 30px rgba(0,0,0,.6); animation:pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 6px 30px rgba(0,0,0,.6),0 0 0 0 rgba(200,134,10,.5)} 50%{box-shadow:0 6px 30px rgba(0,0,0,.6),0 0 0 12px rgba(200,134,10,0)} }
+    #chat-btn svg { width:28px; height:28px; fill:#fff; }
+    #chat-badge { position:absolute; top:-4px; right:-4px; background:var(--deep); color:var(--gold-light); border:1px solid var(--gold); font-size:.65rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+    #chat-window { position:fixed; bottom:100px; right:28px; z-index:500; width:360px; max-height:520px; background:var(--dark-brown); border:1px solid rgba(200,134,10,.35); border-radius:6px; display:none; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.8); overflow:hidden; }
+    #chat-window.open { display:flex; animation:chatIn .3s ease; }
+    @keyframes chatIn { from{opacity:0;transform:translateY(20px) scale(.95)} to{opacity:1;transform:none} }
+    .chat-head { background:linear-gradient(135deg,var(--red-dark),var(--brown)); padding:14px 18px; display:flex; align-items:center; gap:12px; }
+    .chat-ava { width:40px; height:40px; border-radius:50%; overflow:hidden; border:2px solid var(--gold); flex-shrink:0; }
+    .chat-ava img { width:100%; height:100%; object-fit:cover; object-position:top; filter:sepia(20%) saturate(1.4); }
+    .chat-info { flex:1; }
+    .chat-info strong { display:block; font-size:.9rem; letter-spacing:1px; color:var(--gold-light); }
+    .chat-info span { font-size:.7rem; color:rgba(245,230,211,.6); letter-spacing:1px; }
+    .chat-online { width:8px; height:8px; background:#25d366; border-radius:50%; flex-shrink:0; }
+    .chat-close { background:none; border:none; cursor:pointer; color:var(--cream); font-size:1.2rem; line-height:1; padding:0; }
+    .chat-msgs { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
+    .chat-msgs::-webkit-scrollbar { width:4px; }
+    .chat-msgs::-webkit-scrollbar-track { background:rgba(255,255,255,.05); }
+    .chat-msgs::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+    .msg { max-width:82%; padding:10px 14px; border-radius:4px; font-family:'Lora',serif; font-size:.87rem; line-height:1.6; }
+    .msg.bot { background:rgba(200,134,10,.12); border:1px solid rgba(200,134,10,.2); color:var(--cream); align-self:flex-start; border-bottom-left-radius:0; }
+    .msg.user { background:var(--red); color:#fff; align-self:flex-end; border-bottom-right-radius:0; }
+    .msg-time { font-size:.63rem; opacity:.5; margin-top:4px; font-family:'Oswald',sans-serif; letter-spacing:1px; }
+    .chat-typing { display:flex; gap:5px; align-items:center; padding:10px 14px; align-self:flex-start; }
+    .chat-typing span { width:7px; height:7px; background:var(--gold); border-radius:50%; animation:blink 1.2s infinite; }
+    .chat-typing span:nth-child(2) { animation-delay:.2s; }
+    .chat-typing span:nth-child(3) { animation-delay:.4s; }
+    @keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+    .chat-quick { display:flex; flex-wrap:wrap; gap:7px; padding:10px 14px 4px; }
+    .qbtn { background:rgba(200,134,10,.1); border:1px solid rgba(200,134,10,.3); color:var(--gold-light); font-size:.7rem; letter-spacing:1px; padding:6px 11px; cursor:pointer; transition:background .2s; white-space:nowrap; font-family:'Oswald',sans-serif; }
+    .qbtn:hover { background:rgba(200,134,10,.28); }
+    .chat-form { display:flex; border-top:1px solid rgba(200,134,10,.2); }
+    .chat-form input { flex:1; background:rgba(255,255,255,.05); border:none; color:var(--white); padding:12px 16px; font-family:'Oswald',sans-serif; font-size:.88rem; outline:none; }
+    .chat-form input::placeholder { color:rgba(245,230,211,.35); }
+    .chat-form button { background:var(--red); border:none; color:#fff; padding:12px 18px; cursor:pointer; font-size:1.1rem; transition:background .3s; }
+    .chat-form button:hover { background:var(--gold); color:var(--deep); }
+
+    /* SCROLL REVEALS */
+    .rv  { opacity:0; transform:translateY(40px); transition:opacity .8s,transform .8s; }
+    .rvl { opacity:0; transform:translateX(-50px); transition:opacity .8s,transform .8s; }
+    .rvr { opacity:0; transform:translateX(50px); transition:opacity .8s,transform .8s; }
+    .rv.v,.rvl.v,.rvr.v { opacity:1; transform:none; }
+
+    /* FOOTER */
+    footer { background:#0a0300; padding:50px 5% 30px; text-align:center; border-top:1px solid rgba(200,134,10,.2); }
+    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; letter-spacing:6px; color:var(--gold-light); }
+    .footer-logo em { color:var(--red); font-style:normal; }
+    .footer-tagline { color:var(--muted); font-size:.78rem; letter-spacing:2px; margin:6px 0 22px; }
+    .footer-hash { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
+    .footer-hash span { background:rgba(200,134,10,.1); border:1px solid rgba(200,134,10,.25); color:var(--gold-light); font-size:.72rem; letter-spacing:2px; padding:5px 13px; }
+    .footer-div { height:1px; background:linear-gradient(90deg,transparent,rgba(200,134,10,.3),transparent); margin:20px 0; }
+    .ibratech-line { color:var(--muted); font-size:.76rem; letter-spacing:1.5px; }
+    .ibratech-line a { color:var(--gold-light); text-decoration:none; font-weight:600; }
+    .ibratech-line a:hover { color:var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      nav ul { display:none; }
+      .about-grid,.contact-grid { grid-template-columns:1fr; }
+      .gal-grid { grid-template-columns:1fr 1fr; }
+      .gi:first-child { grid-column:span 2; grid-row:span 1; }
+      .spin-badge { width:72px; height:72px; font-size:.8rem; top:90px; right:10px; }
+      #chat-window { width:calc(100vw - 20px); right:10px; }
+      .godfidence-box { padding:24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TUNDE<em>.</em></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#speech">His Word</a></li>
+    <li><a href="#rebirth">Agenda</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#socials">Connect</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Vote Tunde</a>
+</nav>
+
+<!-- HERO SLIDER -->
+<section class="hero" id="home">
+  <div class="slides" id="sliderTrack">
+
+    <div class="slide slide-1 active">
+      <div class="particles" id="p1"></div>
+      <img class="slide-bg" src="/mnt/user-data/uploads/309255.jpg" alt="" />
+      <div class="slide-content">
+        <div class="hero-eyebrow">SRC President Hopeful &rsquo;26 &middot; KNUST</div>
+        <div class="hero-name">TUNDE<br><span class="gold">MODICIOUS</span><br><span class="red">OYE</span></div>
+        <div class="hero-mantra">#WONIM TUNDE?</div>
+        <div class="hero-sub">Africa Hall JCRC Vice President &middot; Political Science</div>
+        <div class="hero-btns">
+          <a href="#about" class="btn-primary">Know Your Tunde</a>
+          <a href="#rebirth" class="btn-outline">The Agenda</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-2">
+      <div class="particles" id="p2"></div>
+      <img class="slide-bg" src="/mnt/user-data/uploads/309255.jpg" alt="" />
+      <div class="slide-content">
+        <div class="hero-eyebrow">The Agenda Is Clear</div>
+        <div class="hero-name">THE<br><span class="gold">REBIRTH</span><br>IS NOW</div>
+        <div class="hero-mantra">TUNDELISED SRC</div>
+        <div class="hero-sub">From obsolete to proactive &mdash; a complete transformation</div>
+        <div class="hero-btns">
+          <a href="#rebirth" class="btn-primary">Rebirth Agenda</a>
+          <a href="#speech" class="btn-outline">His Message</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-3">
+      <div class="particles" id="p3"></div>
+      <img class="slide-bg" src="/mnt/user-data/uploads/309255.jpg" alt="" />
+      <div class="slide-content">
+        <div class="hero-eyebrow">Son of the Sun &middot; KNUST &rsquo;26</div>
+        <div class="hero-name">YOUR<br><span class="gold">TUNDE</span><br>2026</div>
+        <div class="hero-mantra">GODFIDENCE</div>
+        <div class="hero-sub">God + Confidence &middot; 80,000 Students &middot; One Vision</div>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Join the Movement</a>
+          <a href="#socials" class="btn-outline">Follow Tunde</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="spin-badge">REBIRTH<br><small>&rsquo;26</small></div>
+  <div class="slider-arrows">
+    <button class="arr" id="prevBtn">&#8592;</button>
+    <button class="arr" id="nextBtn">&#8594;</button>
+  </div>
+  <div class="slider-dots" id="dots">
+    <div class="dot active" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+  </div>
+  <div class="prog" id="prog"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="tick-item">WONIM TUNDE? <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">YOUR TUNDE <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">SRC PRESIDENT &rsquo;26 <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">REBIRTH AGENDA <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">SON OF THE SUN <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">GODFIDENCE <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">KNUST &middot; AFRICA HALL <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">TUNDELISM <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">WONIM TUNDE? <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">YOUR TUNDE <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">SRC PRESIDENT &rsquo;26 <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">REBIRTH AGENDA <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">SON OF THE SUN <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">GODFIDENCE <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">KNUST &middot; AFRICA HALL <span class="tick-dot">&#10022;</span></span>
+    <span class="tick-item">TUNDELISM <span class="tick-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="lbl rv">Who is He?</div>
+  <div class="stitle rv">MEET YOUR <span class="r">CANDIDATE</span></div>
+  <div class="divl rv"></div>
+  <div class="about-grid">
+    <div class="img-wrap rvl">
+      <img src="/mnt/user-data/uploads/309255.jpg" alt="Tunde Modicious Oye" />
+      <div class="img-frame"></div>
+      <div class="img-cap">SRC<br>HOPEFUL<br>&rsquo;26</div>
+    </div>
+    <div class="about-text rvr">
+      <div class="scripture">
+        &ldquo;To us as a university community a son has been given, and the government shall be upon his shoulder. His name is <strong>TUNDE OYE MODICIOUS</strong> &mdash; The Son of the Sun.&rdquo;
+        <cite>&mdash; Biblical Allusion (Isaiah 9:6) &middot; As declared at the Campaign Launch</cite>
+      </div>
+      <p><strong>Tunde Modicious Oye</strong> is more than a name on a ballot &mdash; he is a movement, a mission, and a mandate. Currently serving as the <strong>Africa Hall JCRC Vice President</strong> at KNUST, Tunde has already proven that he leads with purpose, passion, and the people at heart.</p>
+      <p>A <strong>Political Science student</strong> by training and a student advocate by calling, Tunde carries the conviction that KNUST&rsquo;s SRC must evolve &mdash; from a body that merely reacts to one that proactively champions the interests of over <strong>80,000 students</strong>.</p>
+      <p>He calls himself the <strong>&ldquo;Son of the Sun&rdquo;</strong> because, by grace and GODFIDENCE &mdash; a coinage of <em>God + Confidence</em> &mdash; he is hardly unlucky. His name, <strong>TUNDE</strong>, means <em>Return / Rebirth</em> in Yoruba. And that is precisely what his presidency promises.</p>
+      <div class="facts">
+        <div class="fact rv"><div class="fn">JCRC</div><div class="fl">Vice President<br>Africa Hall</div></div>
+        <div class="fact rv"><div class="fn">80K+</div><div class="fl">Students He Will<br>Champion</div></div>
+        <div class="fact rv"><div class="fn">POL.</div><div class="fl">Science<br>Student &middot; KNUST</div></div>
+        <div class="fact rv"><div class="fn">&rsquo;26</div><div class="fl">SRC President<br>Hopeful</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEECH -->
+<section id="speech">
+  <div class="lbl rv" style="text-align:center">His Message</div>
+  <div class="stitle rv" style="text-align:center">STRAIGHT FROM <span class="g">HIS HEART</span></div>
+  <div class="divl divc rv"></div>
+  <div class="speech-wrap">
+    <p class="speech-p rv">&ldquo;I hold the assertion that leadership has always been a <strong>selfless but not a selfish gain</strong> and that serving our student body as the SRC President to champion the interest of the over <strong>80,000 KNUST students</strong> would be done with all my strength and with all my might and heart.&rdquo;</p>
+    <div class="newton-quote rv">
+      <blockquote>&ldquo;If I could see further, it is by standing on the shoulders of giants.&rdquo;<cite>&mdash; Sir Isaac Newton &middot; As referenced by Tunde in his campaign speech</cite></blockquote>
+    </div>
+    <p class="speech-p rv">Tunde knows that no great leader achieves greatness alone. He calls on every student &mdash; those with zeal and will power, and even those whose academic schedules demand much &mdash; to be the giants upon whose shoulders this vision can be achieved <strong>collectively</strong>. The plea is heartfelt: Help TUNDE with your prayers, your voice, and your vote.</p>
+    <div class="godfidence-box rv">
+      <div class="godfidence-title">GODFIDENCE</div>
+      <div class="godfidence-def">GOD + CONFIDENCE &middot; A TUNDE ORIGINAL</div>
+      <p>&ldquo;Dear Colleagues, <strong>GODFIDENCE</strong> surrounds the expression of my emotions and words through continuity and a sense of shared responsibility as your would-be Students&rsquo; Representative Council President here at the <strong>Kwame Nkrumah University of Science and Technology</strong>, embodied in the spirit of <strong>TUNDELISM</strong>. I fear not. Because the you and I, the earth, wind, fire and water &mdash; eeta &mdash; testify and witness the agreement of the chosen one, <strong>TUNDE OYE MODICIOUS as the Next SRC PRESIDENT.</strong>&rdquo;</p>
+    </div>
+    <p class="speech-p rv" style="text-align:center;font-style:italic;color:var(--gold-pale)">&ldquo;May we forever stand. True to our God, true to our native land &mdash; and true to the Kwame Nkrumah University of Science and Technology.&rdquo;</p>
+    <p class="speech-p rv" style="text-align:center;color:var(--gold);font-weight:600;letter-spacing:2px">MEDA MO AASE. &mdash; (To latently tackle the notion that I am a Nigerian.)</p>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat rv"><div class="stat-num">80,000+</div><div class="stat-label">Students to Champion</div></div>
+  <div class="stat rv"><div class="stat-num">1</div><div class="stat-label">Clear Agenda &middot; REBIRTH</div></div>
+  <div class="stat rv"><div class="stat-num">JCRC</div><div class="stat-label">Current Vice President</div></div>
+  <div class="stat rv"><div class="stat-num">100%</div><div class="stat-label">Godfidence</div></div>
+</div>
+
+<!-- REBIRTH AGENDA -->
+<section id="rebirth">
+  <div style="text-align:center">
+    <div class="lbl rv">The Agenda</div>
+    <div class="rebirth-word rv" id="rw">REBIRTH</div>
+    <div class="rebirth-sub rv">TUNDE &middot; &ldquo;One Who Returns&rdquo; &middot; A New Beginning For KNUST SRC</div>
+    <div class="divl divc rv"></div>
+    <p class="rv" style="font-family:'Lora',serif;color:var(--cream);max-width:700px;margin:0 auto 10px;line-height:1.85;font-size:1.02rem">The word <strong style="color:var(--gold-light)">TUNDE</strong> literally means <em>Rebirth</em>. This campaign is not just a bid for an office &mdash; it is a declaration that the SRC&rsquo;s obsolete era is over. The <strong style="color:var(--gold-light)">TUNDELISED SRC</strong> will be proactive, inclusive, and driven by the collective will of 80,000 KNUST students.</p>
+  </div>
+  <div class="cards">
+    <div class="card rv"><div class="card-num">01</div><div class="card-icon">&#127963;&#65039;</div><div class="card-title">Accountable Governance</div><p>Transparent SRC operations, open books, and regular town halls. A leadership that owes its existence to the students and answers to them &mdash; always.</p></div>
+    <div class="card rv"><div class="card-num">02</div><div class="card-icon">&#9889;</div><div class="card-title">Proactive Representation</div><p>Anticipating student needs before they become crises. The TUNDELISED SRC acts &mdash; it does not merely react. Every student issue is a presidential priority.</p></div>
+    <div class="card rv"><div class="card-num">03</div><div class="card-icon">&#129309;</div><div class="card-title">Inclusive Platforms</div><p>Every faculty, every hall, every student voice deserves a seat at the SRC table. Tunde&rsquo;s presidency will be a presidency of ALL &mdash; not a few.</p></div>
+    <div class="card rv"><div class="card-num">04</div><div class="card-icon">&#127758;</div><div class="card-title">Student Welfare First</div><p>From mental health to academic support, from hostel conditions to campus safety &mdash; your wellbeing is the heartbeat of every policy Tunde will champion.</p></div>
+    <div class="card rv"><div class="card-num">05</div><div class="card-icon">&#128161;</div><div class="card-title">Digital Innovation</div><p>Leveraging technology to bring SRC services, updates, and engagement closer to every student &mdash; wherever they are on campus.</p></div>
+    <div class="card rv"><div class="card-num">06</div><div class="card-icon">&#128293;</div><div class="card-title">The Tundelised SRC</div><p>A complete rebirth. Not a cosmetic change &mdash; a fundamental reimagination of what the Students&rsquo; Representative Council at KNUST can and must become.</p></div>
+  </div>
+</section>
+
+<!-- QUOTE BANNER -->
+<div class="qbanner">
+  <blockquote>&ldquo;THE EARTH, WIND, FIRE AND WATER TESTIFY &mdash; TUNDE IS YOUR NEXT SRC PRESIDENT&rdquo;</blockquote>
+  <cite>&mdash; Tunde Modicious Oye &middot; GODFIDENCE &middot; KNUST SRC President Hopeful &rsquo;26</cite>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="lbl rv">Visuals</div>
+  <div class="stitle rv">TUNDE IN <span class="r">MOTION</span></div>
+  <div class="divl rv"></div>
+  <div class="gal-grid">
+    <div class="gi rv"><img src="/mnt/user-data/uploads/309255.jpg" alt="Tunde Campaign" /><div class="gi-ov"><span>Campaign Launch &rsquo;26</span></div></div>
+    <div class="gi rv"><img src="/mnt/user-data/uploads/309255.jpg" alt="Tunde Leadership" style="object-position:top center" /><div class="gi-ov"><span>Visionary Leadership</span></div></div>
+    <div class="gi rv"><img src="/mnt/user-data/uploads/309255.jpg" alt="Rebirth Agenda" style="object-position:center 30%" /><div class="gi-ov"><span>The Rebirth Agenda</span></div></div>
+    <div class="gi rv"><img src="/mnt/user-data/uploads/309255.jpg" alt="Tunde KNUST" style="object-position:center 60%" /><div class="gi-ov"><span>KNUST &middot; Africa Hall</span></div></div>
+    <div class="gi rv"><img src="/mnt/user-data/uploads/309255.jpg" alt="Your Tunde" style="object-position:center 80%" /><div class="gi-ov"><span>Your Tunde &middot; Son of the Sun</span></div></div>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<section id="socials">
+  <div class="lbl rv">Stay Connected</div>
+  <div class="stitle rv">FOLLOW THE <span class="g">MOVEMENT</span></div>
+  <div class="divl rv"></div>
+  <p class="rv" style="font-family:'Lora',serif;color:var(--cream);line-height:1.8;max-width:600px;margin-bottom:6px">The movement lives on every platform. Follow, share, and amplify <strong style="color:var(--gold-light)">#WonimTunde</strong> so that every KNUST student knows their Tunde.</p>
+  <div class="socials-grid">
+    <a href="https://www.facebook.com/share/1CQvA4C7SB/?mibextid=wwXIfr" target="_blank" class="soc soc-facebook rv">
+      <span class="soc-icon">&#128248;</span>
+      <div class="soc-info"><span class="soc-name">Facebook</span><span class="soc-handle">Tunde Modicious Oye</span></div>
+    </a>
+    <a href="https://x.com/oyemodicious?s=21" target="_blank" class="soc soc-x rv">
+      <span class="soc-icon" style="font-weight:900;font-size:1.4rem">&#10006;</span>
+      <div class="soc-info"><span class="soc-name">X (Twitter)</span><span class="soc-handle">@oyemodicious</span></div>
+    </a>
+    <a href="https://www.tiktok.com/@your_tunde?_r=1&_t=ZS-95JhqctG1xM" target="_blank" class="soc soc-tiktok rv">
+      <span class="soc-icon">&#127925;</span>
+      <div class="soc-info"><span class="soc-name">TikTok</span><span class="soc-handle">@your_tunde</span></div>
+    </a>
+    <a href="https://snapchat.com/t/qAl3kTMd" target="_blank" class="soc soc-snapchat rv">
+      <span class="soc-icon">&#128123;</span>
+      <div class="soc-info"><span class="soc-name">Snapchat</span><span class="soc-handle">your_tunde</span></div>
+    </a>
+    <a href="https://www.linkedin.com/in/tunde-modicious-oye-ab71a6354" target="_blank" class="soc soc-linkedin rv">
+      <span class="soc-icon">&#128188;</span>
+      <div class="soc-info"><span class="soc-name">LinkedIn</span><span class="soc-handle">Tunde Modicious Oye</span></div>
+    </a>
+    <a href="https://wa.me/233530895680" target="_blank" class="soc soc-whatsapp rv">
+      <span class="soc-icon">&#128172;</span>
+      <div class="soc-info"><span class="soc-name">WhatsApp</span><span class="soc-handle">0530 895 680</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="lbl rv">Get in Touch</div>
+  <div class="stitle rv">JOIN THE <span class="r">MOVEMENT</span></div>
+  <div class="divl rv"></div>
+  <div class="contact-grid">
+    <div class="contact-text rv">
+      <p>Ready to stand with TUNDE? Every vote, every conversation, every shared post is a brick in the foundation of the <strong>REBIRTH</strong>. Tunde needs your giants&rsquo; shoulders &mdash; and together, we will see further than any SRC has ever seen.</p>
+      <p>Reach out directly. No gatekeeping, no distance between the candidate and the students. That is the Tunde way.</p>
+      <a href="https://wa.me/233530895680" target="_blank" class="ph-btn">&#128172; &nbsp; WhatsApp: 0530 895 680</a>
+      <div class="anthem" style="margin-top:24px">
+        <p>&ldquo;May we forever stand. True to our God, true to our native land, and true to the Kwame Nkrumah University of Science and Technology.&rdquo;</p>
+        <cite>&mdash; University Anthem &middot; Closing Words of Tunde&rsquo;s Campaign Speech</cite>
+      </div>
+    </div>
+    <div class="rvr" style="display:flex;flex-direction:column;gap:16px;justify-content:center">
+      <div class="why-box">
+        <div class="why-title">WHY TUNDE?</div>
+        <ul class="why-list">
+          <li><span class="star">&#10022;</span> Proven leadership as JCRC Vice President, Africa Hall</li>
+          <li><span class="star">&#10022;</span> Deep academic grounding in Political Science</li>
+          <li><span class="star">&#10022;</span> GODFIDENCE &mdash; a leader who fears no challenge</li>
+          <li><span class="star">&#10022;</span> A selfless heart committed to 80,000+ students</li>
+          <li><span class="star">&#10022;</span> The REBIRTH agenda &mdash; bold, clear, and actionable</li>
+          <li><span class="star">&#10022;</span> Son of the Sun &mdash; hardship never finds him unprepared</li>
+          <li><span class="star">&#10022;</span> Collective governance &mdash; he rises on giants&rsquo; shoulders</li>
+        </ul>
+      </div>
+      <a href="#home" style="background:var(--red);color:#fff;text-align:center;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;text-decoration:none;display:block;transition:background .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--deep)'" onmouseout="this.style.background='var(--red)';this.style.color='#fff'">
+        VOTE TUNDE &middot; VOTE REBIRTH
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TUNDE<em>.</em>OYE<em>.</em>MODICIOUS</div>
+  <div class="footer-tagline">SRC President Hopeful &rsquo;26 &middot; KNUST &middot; Africa Hall JCRC Vice President &middot; Political Science</div>
+  <div class="footer-hash">
+    <span>#WonimTunde</span><span>#YourTunde</span><span>#Rebirth2026</span><span>#Tundelism</span><span>#Godfidence</span><span>#SonOfTheSun</span>
+  </div>
+  <div class="footer-div"></div>
+  <div class="ibratech-line">
+    Powered by <a href="tel:+233544823484"><strong>Ibratech</strong></a> &nbsp;&middot;&nbsp; <a href="tel:+233544823484">0544 823 484</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp; &copy; 2026 Tunde Modicious Oye Campaign. All rights reserved.
+  </div>
+</footer>
+
+<!-- CHATBOT BUTTON -->
+<button id="chat-btn" title="Chat with the Campaign Bot">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <div id="chat-badge">1</div>
+</button>
+
+<!-- CHATBOT WINDOW -->
+<div id="chat-window">
+  <div class="chat-head">
+    <div class="chat-ava"><img src="/mnt/user-data/uploads/309255.jpg" alt="Tunde" /></div>
+    <div class="chat-info">
+      <strong>Tunde Campaign Bot</strong>
+      <span>Ask me anything about Tunde &rsquo;26</span>
+    </div>
+    <div class="chat-online"></div>
+    <button class="chat-close" id="chatClose">&#10005;</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-quick" id="quickBtns">
+    <button class="qbtn" data-q="Who is Tunde?">Who is Tunde?</button>
+    <button class="qbtn" data-q="What is the Rebirth agenda?">Rebirth Agenda</button>
+    <button class="qbtn" data-q="What is GODFIDENCE?">GODFIDENCE</button>
+    <button class="qbtn" data-q="How do I contact Tunde?">Contact Info</button>
+    <button class="qbtn" data-q="Why should I vote for Tunde?">Why vote Tunde?</button>
+    <button class="qbtn" data-q="What does the name TUNDE mean?">Name meaning</button>
+    <button class="qbtn" data-q="What is TUNDELISM?">Tundelism</button>
+  </div>
+  <form class="chat-form" id="chatForm">
+    <input type="text" id="chatInput" placeholder="Ask about Tunde's campaign..." autocomplete="off" />
+    <button type="submit">&#10148;</button>
+  </form>
+</div>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a,button,.card,.gi,.soc,.qbtn,.arr').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+// PARTICLES
+function makeParticles(id) {
+  const c = document.getElementById(id); if(!c) return;
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div'); p.className='p';
+    const s=Math.random()*4+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*4+4).toFixed(1)}s;--dl:${(Math.random()*3).toFixed(1)}s`;
+    c.appendChild(p);
+  }
+}
+['p1','p2','p3'].forEach(makeParticles);
+
+// HERO SLIDER
+const slides=document.querySelectorAll('.slide');
+const dotEls=document.querySelectorAll('.dot');
+const prog=document.getElementById('prog');
+let cur2=0,tmr;
+function goTo(n){
+  slides[cur2].classList.remove('active'); dotEls[cur2].classList.remove('active');
+  cur2=(n+slides.length)%slides.length;
+  slides[cur2].classList.add('active'); dotEls[cur2].classList.add('active');
+  prog.classList.remove('go'); prog.style.transition='none'; prog.style.width='0';
+  void prog.offsetWidth; prog.classList.add('go');
+}
+function startTimer(){ clearInterval(tmr); tmr=setInterval(()=>goTo(cur2+1),5000); }
+document.getElementById('nextBtn').onclick=()=>{goTo(cur2+1);startTimer();};
+document.getElementById('prevBtn').onclick=()=>{goTo(cur2-1);startTimer();};
+dotEls.forEach(d=>d.addEventListener('click',()=>{goTo(+d.dataset.i);startTimer();}));
+prog.classList.add('go'); startTimer();
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('v');
+      if(e.target.id==='rw') setTimeout(()=>e.target.classList.add('on'),200);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach((el,i)=>{
+  el.style.transitionDelay=(i%6*0.07)+'s'; obs.observe(el);
+});
+
+// NAV ACTIVE
+const secEls=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('nav ul a');
+window.addEventListener('scroll',()=>{
+  let c='';
+  secEls.forEach(s=>{if(window.scrollY>=s.offsetTop-130) c=s.id;});
+  navAs.forEach(a=>a.style.color=a.getAttribute('href')==='#'+c?'var(--gold-light)':'');
+});
+
+// CHATBOT KNOWLEDGE BASE
+const KB={
+  "who is tunde":"Tunde Modicious Oye is the SRC President Hopeful for 2026 at KNUST. He currently serves as the Africa Hall JCRC Vice President and is a Political Science student. He calls himself the 'Son of the Sun' — a leader born to lead, guided by GODFIDENCE, and driven by unwavering love for 80,000 KNUST students.",
+  "rebirth":"The REBIRTH agenda is Tunde's campaign vision. His name literally means 'Rebirth' in Yoruba. The agenda transforms the SRC from its obsolete, reactive form into a TUNDELISED — proactive, inclusive, and accountable — institution that truly serves every student at KNUST.",
+  "godfidence":"GODFIDENCE is a word coined by Tunde himself: GOD + CONFIDENCE. It reflects his unwavering belief, rooted in faith and courage, that this vision for KNUST's SRC will succeed. He fears not, because the earth, wind, fire and water testify to his mandate.",
+  "contact":"You can reach Tunde directly on WhatsApp: 0530 895 680. Follow him on Facebook (Tunde Modicious Oye), X (@oyemodicious), TikTok (@your_tunde), Snapchat, and LinkedIn. The movement is everywhere!",
+  "vote":"You should vote for Tunde because: ✦ Proven JCRC leadership at Africa Hall ✦ Political Science training ✦ GODFIDENCE — he fears no challenge ✦ A selfless commitment to 80,000 students ✦ A bold and clear REBIRTH agenda. A vote for Tunde is a vote for KNUST's future.",
+  "tunde mean":"TUNDE is a Yoruba name meaning 'Return' or 'Rebirth'. It is the perfect name for this campaign — because Tunde's presidency signals the return of strong, proactive, student-first leadership to KNUST's SRC.",
+  "tundelism":"TUNDELISM is the spirit and philosophy behind Tunde's leadership. It embodies proactiveness, godfidence, selfless service, inclusivity, and the belief that the SRC can and must be reborn into something far greater than what it currently is.",
+  "jcrc":"Tunde is the current Vice President of the Africa Hall JCRC (Junior Common Room Council) at KNUST — a role that has given him firsthand, hands-on experience in student governance and hall-level representation.",
+  "knust":"Tunde is a student at the Kwame Nkrumah University of Science and Technology (KNUST), running for SRC President — the Students' Representative Council — which represents over 80,000 students.",
+  "agenda":"Tunde's six-point agenda includes: 1) Accountable Governance 2) Proactive Representation 3) Inclusive Platforms 4) Student Welfare First 5) Digital Innovation 6) A complete Tundelised rebirth of the SRC.",
+  "son of the sun":"Tunde calls himself the 'Son of the Sun' because he is guided by GODFIDENCE — he is hardly unlucky. Just as the sun rises faithfully, Tunde shows up for students consistently and with full commitment.",
+  "social":"Follow Tunde on: 📘 Facebook (Tunde Modicious Oye) · ✖ X @oyemodicious · 🎵 TikTok @your_tunde · 👻 Snapchat · 💼 LinkedIn · 💬 WhatsApp 0530 895 680",
+  "newton":"Tunde referenced Isaac Newton's quote — 'If I could see further, it is by standing on the shoulders of giants' — to acknowledge that his vision can only be achieved collectively, with every KNUST student as a giant.",
+  "meda":"'Meda mo aase' means 'Thank you' in Twi. Tunde ended his campaign speech with this to connect with the KNUST student body and to affirm that despite his Nigerian heritage, he is fully rooted in and committed to KNUST.",
+  "ibratech":"This campaign website was built and powered by Ibratech. Contact: 0544 823 484.",
+  "default":"Great question! Tunde Modicious Oye is KNUST's SRC President Hopeful for 2026. His campaign is built on GODFIDENCE, the REBIRTH agenda, and a deep commitment to all 80,000 KNUST students. Try asking about his agenda, background, contact, or why you should vote for him!"
+};
+
+function findAnswer(q){
+  const lq=q.toLowerCase();
+  for(const[k,v] of Object.entries(KB)){ if(lq.includes(k)) return v; }
+  return KB["default"];
+}
+
+const chatBtn=document.getElementById('chat-btn');
+const chatWin=document.getElementById('chat-window');
+const chatClose=document.getElementById('chatClose');
+const chatMsgs=document.getElementById('chatMsgs');
+const chatForm=document.getElementById('chatForm');
+const chatInput=document.getElementById('chatInput');
+const quickBtns=document.getElementById('quickBtns');
+const chatBadge=document.getElementById('chat-badge');
+let chatOpen=false, greeted=false;
+
+function addMsg(text,who){
+  const d=document.createElement('div'); d.className='msg '+who;
+  d.innerHTML=text+`<div class="msg-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>`;
+  chatMsgs.appendChild(d); chatMsgs.scrollTop=chatMsgs.scrollHeight;
+}
+function showTyping(){
+  const t=document.createElement('div'); t.className='chat-typing'; t.id='typing';
+  t.innerHTML='<span></span><span></span><span></span>'; chatMsgs.appendChild(t); chatMsgs.scrollTop=chatMsgs.scrollHeight;
+}
+function hideTyping(){ const t=document.getElementById('typing'); if(t) t.remove(); }
+function botReply(q){ showTyping(); setTimeout(()=>{ hideTyping(); addMsg(findAnswer(q),'bot'); },900+Math.random()*600); }
+
+chatBtn.addEventListener('click',()=>{
+  chatOpen=!chatOpen; chatWin.classList.toggle('open',chatOpen); chatBadge.style.display='none';
+  if(!greeted){ greeted=true; setTimeout(()=>addMsg("👋 Welcome! I'm Tunde's Campaign Assistant. Ask me anything about <strong>Tunde Modicious Oye</strong>, the <strong>REBIRTH agenda</strong>, or how to join the movement!",'bot'),400); }
+});
+chatClose.addEventListener('click',()=>{ chatOpen=false; chatWin.classList.remove('open'); });
+chatForm.addEventListener('submit',e=>{
+  e.preventDefault(); const q=chatInput.value.trim(); if(!q) return;
+  addMsg(q,'user'); chatInput.value=''; botReply(q);
+});
+quickBtns.querySelectorAll('.qbtn').forEach(b=>b.addEventListener('click',()=>{
+  addMsg(b.dataset.q,'user'); botReply(b.dataset.q);
+}));
+</script>
+</body>
+</html>
