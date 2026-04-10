@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Tunde Oye Modicious | KNUST SRC 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --maroon:#8B1A1A; --maroon-d:#6B0F0F; --maroon-l:#B22222;
+      --gold:#D4AF37; --gold-l:#F4C842;
+      --off-white:#FAF8F4; --black:#111; --gray:#555;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--black);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    @keyframes fadeUp   {from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes lPulse   {0%,100%{opacity:1}50%{opacity:.35}}
+    @keyframes barFill  {from{width:0}to{width:100%}}
+    @keyframes waBounce {0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes pulseDot {0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.5}}
+
+    /* LOADER */
+    #loader{position:fixed;inset:0;background:var(--maroon-d);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .7s,visibility .7s;}
+    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+    .ld-word{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,14vw,130px);color:var(--gold);letter-spacing:8px;animation:lPulse 1.5s ease-in-out infinite;}
+    .ld-bar{width:160px;height:3px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:22px;overflow:hidden;}
+    .ld-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));border-radius:99px;animation:barFill 1.8s ease forwards;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 5%;height:70px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s;}
+    nav.scrolled{background:rgba(107,15,15,.97);backdrop-filter:blur(14px);box-shadow:0 4px 28px rgba(0,0,0,.35);}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:27px;color:var(--gold);letter-spacing:3px;}
+    .nav-logo span{color:#fff;}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+    .nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.85);transition:color .2s;position:relative;}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s;}
+    .nav-links a:hover{color:var(--gold);}.nav-links a:hover::after{width:100%;}
+    .nav-cta{background:var(--gold)!important;color:var(--maroon-d)!important;padding:8px 20px;border-radius:4px;font-weight:700!important;}.nav-cta::after{display:none!important;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+    .hamburger span{display:block;width:26px;height:2.5px;background:white;border-radius:2px;}
+    .mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:var(--maroon-d);padding:20px 5%;flex-direction:column;z-index:899;border-top:1px solid rgba(255,255,255,.1);}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+    .mobile-menu a:hover{color:var(--gold);}
+
+    /* PAGE HERO */
+    #page-hero{min-height:54vh;background:linear-gradient(to bottom,rgba(107,15,15,.91),rgba(107,15,15,.76)),url('tunde5.jpg') center/cover no-repeat;background-color:var(--maroon-d);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 5% 70px;position:relative;overflow:hidden;}
+    #page-hero::after{content:'CONTACT';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,20vw,240px);color:rgba(255,255,255,.03);letter-spacing:12px;pointer-events:none;}
+    .ph-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;animation:fadeUp .8s ease .3s both;position:relative;z-index:1;}
+    .ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,13vw,140px);color:white;letter-spacing:4px;line-height:.88;animation:fadeUp .9s ease .5s both;position:relative;z-index:1;}
+    .ph-title .g{color:var(--gold);}
+    .ph-sub{font-family:'Barlow Condensed',sans-serif;font-size:19px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:16px;animation:fadeUp .8s ease .75s both;position:relative;z-index:1;}
+
+    /* SHARED */
+    section{padding:80px 5%;}
+    .container{max-width:1100px;margin:0 auto;}
+    .stag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--maroon);border:1.5px solid var(--maroon);padding:4px 14px;border-radius:3px;margin-bottom:14px;}
+    .stag-g{color:var(--gold);border-color:var(--gold);}
+    .stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,70px);line-height:.92;letter-spacing:2px;}
+    .stitle .m{color:var(--maroon);}
+    .reveal{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── GIANT WHATSAPP CTA ── */
+    #wa-hero{background:white;padding:70px 5%;}
+    .wa-hero-card{
+      background:linear-gradient(135deg,#075E54 0%,#128C7E 50%,#25D366 100%);
+      border-radius:22px;padding:60px 48px;
+      max-width:780px;margin:0 auto;
+      text-align:center;position:relative;overflow:hidden;
+    }
+    .wa-hero-card::before{content:'💬';position:absolute;font-size:280px;opacity:.06;right:-30px;top:-40px;pointer-events:none;}
+    .wa-hero-card::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);bottom:-80px;left:-60px;pointer-events:none;}
+    .wahc-tag{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:12px;}
+    .wahc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,9vw,90px);color:white;letter-spacing:4px;line-height:.9;}
+    .wahc-desc{font-size:17px;color:rgba(255,255,255,.8);max-width:440px;margin:18px auto;line-height:1.7;}
+    .wahc-number{
+      font-family:'Bebas Neue',sans-serif;font-size:34px;color:white;
+      letter-spacing:4px;margin:16px 0;
+      display:inline-flex;align-items:center;gap:12px;
+    }
+    .online-dot{width:12px;height:12px;background:#4ade80;border-radius:50%;animation:pulseDot 2s ease-in-out infinite;flex-shrink:0;}
+    .wahc-btn{
+      display:inline-flex;align-items:center;gap:12px;
+      background:white;color:#075E54;
+      font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;
+      padding:18px 44px;border-radius:9px;
+      box-shadow:0 8px 32px rgba(0,0,0,.2);
+      transition:all .25s;margin-top:8px;
+    }
+    .wahc-btn:hover{background:#f0fff4;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.25);}
+    .wahc-btn svg{width:28px;height:28px;}
+    .wahc-note{font-size:13px;color:rgba(255,255,255,.55);margin-top:16px;}
+
+    /* ── CONTACT METHODS GRID ── */
+    #contact-methods{background:var(--off-white);}
+    .cm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px;}
+    .cm-card{
+      background:white;border-radius:14px;padding:32px;
+      box-shadow:0 2px 18px rgba(0,0,0,.07);
+      position:relative;overflow:hidden;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .cm-card:hover{transform:translateY(-5px);box-shadow:0 10px 32px rgba(0,0,0,.12);}
+    .cm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--maroon),var(--gold));}
+    .cm-icon{font-size:44px;margin-bottom:16px;display:block;}
+    .cm-type{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+    .cm-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--black);letter-spacing:1px;margin-bottom:8px;}
+    .cm-value{font-size:18px;color:var(--maroon);font-weight:700;margin-bottom:6px;}
+    .cm-desc{font-size:14px;color:var(--gray);line-height:1.7;}
+    .cm-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-top:18px;padding:11px 22px;border-radius:7px;
+      font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;
+      letter-spacing:1px;text-transform:uppercase;transition:all .2s;
+    }
+    .cm-btn-maroon{background:var(--maroon-d);color:white;}
+    .cm-btn-maroon:hover{background:var(--maroon-l);}
+    .cm-btn-green{background:#25D366;color:white;}
+    .cm-btn-green:hover{background:#1ead55;}
+
+    /* ── SOCIAL MEDIA ── */
+    #socials{background:var(--maroon-d);}
+    .socials-intro{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;line-height:1.75;margin:14px 0 44px;}
+    .socials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .soc-card{
+      display:flex;align-items:center;gap:14px;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+      border-radius:11px;padding:20px;
+      transition:all .3s;
+    }
+    .soc-card:hover{background:rgba(255,255,255,.14);border-color:var(--gold);transform:translateX(5px);}
+    .soc-icon{font-size:30px;flex-shrink:0;}
+    .soc-platform{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:.5px;}
+    .soc-handle{font-size:13px;color:rgba(255,255,255,.5);}
+    .soc-arrow{margin-left:auto;color:var(--gold);font-size:18px;transition:transform .2s;}
+    .soc-card:hover .soc-arrow{transform:translateX(4px);}
+
+    /* ── QUICK MESSAGE FORM ── */
+    #quick-form{background:white;}
+    .qf-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+    .qf-left .stitle{margin-bottom:18px;}
+    .qf-left p{font-size:16px;line-height:1.85;color:var(--gray);margin-bottom:16px;}
+    .contact-topics{list-style:none;margin-top:22px;}
+    .contact-topics li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:15px;color:var(--gray);}
+    .contact-topics li::before{content:'✦';color:var(--gold);font-size:10px;flex-shrink:0;}
+    .qf-card{background:var(--off-white);border-radius:16px;padding:38px;}
+    .qf-head{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--maroon);letter-spacing:2px;margin-bottom:22px;}
+    .fg{margin-bottom:18px;}
+    .fl{display:block;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black);margin-bottom:7px;}
+    .fi,.fs,.ft{width:100%;padding:13px 15px;border:1.5px solid #e0e0e0;border-radius:8px;font-family:'Barlow',sans-serif;font-size:15px;color:var(--black);background:white;outline:none;transition:border-color .2s,box-shadow .2s;}
+    .fi:focus,.fs:focus,.ft:focus{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(139,26,26,.1);}
+    .fi::placeholder,.ft::placeholder{color:#ccc;}
+    .fs{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+    .ft{min-height:110px;resize:vertical;}
+    .qf-submit{width:100%;padding:15px;background:var(--maroon-d);color:white;border:none;border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
+    .qf-submit:hover{background:var(--maroon-l);transform:translateY(-2px);}
+    .qf-note{font-size:12px;color:var(--gray);text-align:center;margin-top:10px;}
+
+    /* ── FAQ ── */
+    #faq{background:var(--off-white);}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px;}
+    .faq-item{background:white;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.07);}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;cursor:pointer;transition:background .2s;gap:12px;}
+    .faq-q:hover{background:var(--off-white);}
+    .faq-q-text{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--black);}
+    .faq-toggle{color:var(--maroon);font-size:22px;font-weight:700;transition:transform .3s;flex-shrink:0;line-height:1;}
+    .faq-item.open .faq-toggle{transform:rotate(45deg);color:var(--gold);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
+    .faq-item.open .faq-a{max-height:220px;padding:0 22px 18px;}
+    .faq-a p{font-size:14px;color:var(--gray);line-height:1.75;border-top:1px solid rgba(0,0,0,.06);padding-top:12px;}
+
+    /* ── FINAL JOIN CTA ── */
+    #final-cta{background:linear-gradient(135deg,var(--gold),var(--gold-l));text-align:center;padding:90px 5%;}
+    .fc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,9vw,100px);color:var(--maroon-d);letter-spacing:4px;line-height:.9;}
+    .fc-sub{font-size:17px;color:var(--maroon-d);opacity:.75;max-width:480px;margin:20px auto 36px;line-height:1.7;}
+    .fc-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+    .btn-dark{background:var(--maroon-d);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 40px;border-radius:5px;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(107,15,15,.3);}
+    .btn-dark:hover{background:var(--maroon-l);transform:translateY(-3px);}
+    .btn-white{background:white;color:var(--maroon-d);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;border-radius:5px;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-white:hover{background:var(--off-white);transform:translateY(-3px);}
+
+    /* SHARED */
+    #wa-float{position:fixed;bottom:96px;right:24px;z-index:888;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.5);animation:waBounce 3s ease-in-out infinite;transition:transform .2s;}
+    #wa-float:hover{transform:scale(1.1);animation:none;}
+    #dev-credit{background:#181818;padding:26px 5%;display:flex;align-items:center;gap:20px;justify-content:center;flex-wrap:wrap;}
+    .dev-avatar{width:46px;height:46px;border-radius:50%;background:var(--maroon);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800;font-size:17px;flex-shrink:0;}
+    .dev-text .dev-by{font-size:10px;color:#888;letter-spacing:2px;text-transform:uppercase;}
+    .dev-text .dev-name{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:white;}
+    .dev-text .dev-phone{font-size:13px;color:#aaa;}
+    .dev-text .dev-phone a{color:var(--gold);}
+    .dev-wa-btn{background:#25D366;color:white;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border-radius:5px;display:inline-flex;align-items:center;gap:7px;transition:background .2s;}
+    .dev-wa-btn:hover{background:#1ead55;}
+    footer{background:var(--maroon-d);color:rgba(255,255,255,.55);text-align:center;padding:40px 5%;}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold);letter-spacing:4px;}
+    .footer-meta{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:rgba(255,255,255,.3);margin-top:4px;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin:18px 0;}
+    .footer-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .2s;}
+    .footer-links a:hover{color:var(--gold);}
+    .footer-copy{font-size:12px;margin-top:14px;}
+
+    @media(max-width:900px){.cm-grid{grid-template-columns:1fr;}.socials-grid{grid-template-columns:1fr 1fr;}.qf-grid{grid-template-columns:1fr;gap:36px;}.faq-grid{grid-template-columns:1fr;}}
+    @media(max-width:640px){.nav-links{display:none;}.hamburger{display:flex;}section{padding:60px 5%;}.socials-grid{grid-template-columns:1fr;}.wa-hero-card{padding:40px 24px;}}
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-word">CONTACT</div>
+  <div class="ld-bar"><div class="ld-bar-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">TUNDE <span>OYE</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="manifesto.html">Manifesto</a></li>
+    <li><a href="rebirth.html">REBIRTH</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="join.html" class="nav-cta">Join Movement</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="about.html">About Tunde</a>
+  <a href="manifesto.html">Manifesto</a><a href="rebirth.html">REBIRTH</a>
+  <a href="gallery.html">Gallery</a><a href="media.html">Media</a>
+  <a href="contact.html">Contact</a>
+  <a href="join.html" style="color:var(--gold)">★ Join Movement</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="ph-eyebrow">We're Listening</div>
+  <h1 class="ph-title">GET IN<br><span class="g">TOUCH</span></h1>
+  <div class="ph-sub">Fast responses. Real conversations. Always open.</div>
+</section>
+
+<!-- GIANT WHATSAPP CTA -->
+<section id="wa-hero">
+  <div class="container">
+    <div class="wa-hero-card reveal">
+      <div class="wahc-tag">Primary Contact Method</div>
+      <div class="wahc-title">CHAT ON<br>WHATSAPP</div>
+      <p class="wahc-desc">
+        The fastest way to reach Tunde and the REBIRTH campaign team.
+        We respond quickly — because every student's voice matters to us.
+      </p>
+      <div class="wahc-number">
+        <div class="online-dot"></div>
+        0530895680
+      </div>
+      <br/>
+      <a href="https://wa.me/233530895680?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20Tunde's%20campaign" class="wahc-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="#25D366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        START CHAT NOW
+      </a>
+      <div class="wahc-note">You'll be connected instantly to the REBIRTH campaign team.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT METHODS -->
+<section id="contact-methods">
+  <div class="container">
+    <span class="stag">All Contact Options</span>
+    <h2 class="stitle">EVERY WAY TO<br><span class="m">REACH US</span></h2>
+    <div class="cm-grid">
+      <div class="cm-card reveal">
+        <span class="cm-icon">📱</span>
+        <div class="cm-type">Primary · Always Open</div>
+        <div class="cm-title">WhatsApp</div>
+        <div class="cm-value">0530895680</div>
+        <div class="cm-desc">Send a message anytime. Our campaign team monitors WhatsApp daily and responds to every student who reaches out.</div>
+        <a href="https://wa.me/233530895680?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20Tunde's%20campaign" class="cm-btn cm-btn-green" target="_blank" rel="noopener">
+          💬 Chat on WhatsApp
+        </a>
+      </div>
+      <div class="cm-card reveal" style="transition-delay:.1s">
+        <span class="cm-icon">📞</span>
+        <div class="cm-type">Phone · Campaign Office</div>
+        <div class="cm-title">Call Directly</div>
+        <div class="cm-value">0530895680</div>
+        <div class="cm-desc">For press interviews, media inquiries, or urgent campaign matters — call the REBIRTH campaign office directly during the day.</div>
+        <a href="tel:0530895680" class="cm-btn cm-btn-maroon">📞 Call Now</a>
+      </div>
+      <div class="cm-card reveal" style="transition-delay:.2s">
+        <span class="cm-icon">🐦</span>
+        <div class="cm-type">Social · Public Engagement</div>
+        <div class="cm-title">X (Twitter)</div>
+        <div class="cm-value">@oyemodicious</div>
+        <div class="cm-desc">Follow Tunde on X for real-time campaign updates, governance discussions, and direct student engagement on the platform.</div>
+        <a href="https://x.com/oyemodicious" class="cm-btn cm-btn-maroon" target="_blank" rel="noopener">Follow on X →</a>
+      </div>
+      <div class="cm-card reveal" style="transition-delay:.3s">
+        <span class="cm-icon">💼</span>
+        <div class="cm-type">Professional · Networking</div>
+        <div class="cm-title">LinkedIn</div>
+        <div class="cm-value">Tunde Modicious Oye</div>
+        <div class="cm-desc">Connect with Tunde on LinkedIn for partnership proposals, academic collaboration, and professional networking opportunities.</div>
+        <a href="https://www.linkedin.com/in/tunde-modicious-oye" class="cm-btn cm-btn-maroon" target="_blank" rel="noopener">Connect →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL LINKS -->
+<section id="socials">
+  <div class="container">
+    <span class="stag stag-g">Follow the Campaign</span>
+    <h2 class="stitle" style="color:white">ALL SOCIAL<br><span style="color:var(--gold)">PLATFORMS</span></h2>
+    <p class="socials-intro">
+      Stay connected with the REBIRTH movement. Every share, follow, and comment
+      helps spread Tunde's message to more KNUST students.
+    </p>
+    <div class="socials-grid">
+      <a href="https://www.tiktok.com/@your_tunde" target="_blank" rel="noopener" class="soc-card reveal">
+        <div class="soc-icon">🎵</div>
+        <div><div class="soc-platform">TikTok</div><div class="soc-handle">@your_tunde</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+      <a href="https://x.com/oyemodicious" target="_blank" rel="noopener" class="soc-card reveal" style="transition-delay:.06s">
+        <div class="soc-icon">🐦</div>
+        <div><div class="soc-platform">X / Twitter</div><div class="soc-handle">@oyemodicious</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+      <a href="https://www.facebook.com/share/1CQvA4C7SB" target="_blank" rel="noopener" class="soc-card reveal" style="transition-delay:.12s">
+        <div class="soc-icon">📘</div>
+        <div><div class="soc-platform">Facebook</div><div class="soc-handle">Tunde Oye Modicious</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+      <a href="https://snapchat.com/t/qAl3kTMd" target="_blank" rel="noopener" class="soc-card reveal" style="transition-delay:.18s">
+        <div class="soc-icon">👻</div>
+        <div><div class="soc-platform">Snapchat</div><div class="soc-handle">@your_tunde</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+      <a href="https://www.linkedin.com/in/tunde-modicious-oye" target="_blank" rel="noopener" class="soc-card reveal" style="transition-delay:.24s">
+        <div class="soc-icon">💼</div>
+        <div><div class="soc-platform">LinkedIn</div><div class="soc-handle">Tunde Modicious Oye</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+      <a href="https://wa.me/233530895680" target="_blank" rel="noopener" class="soc-card reveal" style="transition-delay:.3s">
+        <div class="soc-icon">📱</div>
+        <div><div class="soc-platform">WhatsApp</div><div class="soc-handle">0530895680</div></div>
+        <div class="soc-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK MESSAGE FORM -->
+<section id="quick-form">
+  <div class="container">
+    <div class="qf-grid">
+      <div class="qf-left reveal">
+        <span class="stag">Send a Message</span>
+        <h2 class="stitle">WE WANT TO<br>HEAR <span class="m">FROM YOU</span></h2>
+        <p>Whether you have a question, a campus concern to raise, a media request, or simply want to share your thoughts — the REBIRTH team is listening.</p>
+        <p>Every message is read and responded to via WhatsApp within 24 hours.</p>
+        <ul class="contact-topics">
+          <li>Questions about the REBIRTH manifesto</li>
+          <li>Reporting a campus problem for Tunde to address</li>
+          <li>Media, press, and interview requests</li>
+          <li>Partnership and sponsorship enquiries</li>
+          <li>Volunteering and campaign coordination</li>
+          <li>General feedback, ideas, and suggestions</li>
+        </ul>
+      </div>
+      <div class="qf-card reveal" style="transition-delay:.2s">
+        <div class="qf-head">QUICK MESSAGE</div>
+        <div class="fg">
+          <label class="fl" for="qf-name">Your Name</label>
+          <input class="fi" type="text" id="qf-name" placeholder="Your full name"/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="qf-phone">WhatsApp Number</label>
+          <input class="fi" type="tel" id="qf-phone" placeholder="Your phone number"/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="qf-subject">Subject</label>
+          <select class="fs" id="qf-subject">
+            <option value="">Select topic...</option>
+            <option>Question about Manifesto / REBIRTH</option>
+            <option>Campus Issue to Report</option>
+            <option>Media / Press Inquiry</option>
+            <option>Partnership / Sponsorship</option>
+            <option>Volunteer / Join Campaign</option>
+            <option>General Feedback</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl" for="qf-msg">Your Message</label>
+          <textarea class="ft" id="qf-msg" placeholder="Write your message here..."></textarea>
+        </div>
+        <button class="qf-submit" type="button" onclick="sendMsg()">
+          📱 SEND VIA WHATSAPP
+        </button>
+        <p class="qf-note">You'll be redirected to WhatsApp to send directly to the campaign team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <span class="stag">Got Questions?</span>
+    <h2 class="stitle">FREQUENTLY<br><span class="m">ASKED</span></h2>
+    <div class="faq-grid" id="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q"><span class="faq-q-text">How do I vote for Tunde?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Voting takes place during the official KNUST SRC elections. All registered students are eligible. Watch Tunde's social media and our website for the election date announcement from the Electoral Commissioner.</p></div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:.08s">
+        <div class="faq-q"><span class="faq-q-text">How can I volunteer for the campaign?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Visit our Join page and fill in the form — you'll be connected to the volunteer team instantly via WhatsApp. Or message us directly at 0530895680. All halls and departments welcome.</p></div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:.04s">
+        <div class="faq-q"><span class="faq-q-text">What does WONIM TUNDE mean?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>"WONIM TUNDE?" is Twi for "Do you know Tunde?" — a powerful rhetorical question challenging every KNUST student to discover who Tunde Oye Modicious is and what he stands for. It emphasizes his significance, influence, and readiness to lead.</p></div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:.12s">
+        <div class="faq-q"><span class="faq-q-text">What is the REBIRTH agenda?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>REBIRTH is Tunde's complete transformation blueprint for the KNUST SRC covering 5 pillars: Academic Excellence, Student Welfare, Digital Transformation, Transparency & Accountability, and Opportunities & Innovation. Visit the REBIRTH page for the full breakdown.</p></div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:.08s">
+        <div class="faq-q"><span class="faq-q-text">When is the SRC election date?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>The official KNUST SRC election date will be announced by the Electoral Commissioner on campus. Follow Tunde's social media channels and this website for the latest confirmed date. You can also WhatsApp us at 0530895680 for updates.</p></div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:.16s">
+        <div class="faq-q"><span class="faq-q-text">Can I request a media interview?</span><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Yes! For all media inquiries, press interviews, podcast appearances, or coverage requests, contact the campaign directly via WhatsApp at 0530895680 or via the Quick Message form above. We respond to all media requests promptly.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final-cta" class="reveal">
+  <div class="fc-title">READY TO<br>JOIN THE<br>REBIRTH?</div>
+  <p class="fc-sub">
+    Don't just watch from the sidelines. Step up, join the movement,
+    and help build a better KNUST for every student.
+  </p>
+  <div class="fc-btns">
+    <a href="join.html" class="btn-dark">✦ Join the Movement</a>
+    <a href="manifesto.html" class="btn-white">Read the Manifesto →</a>
+  </div>
+</section>
+
+<!-- DEV CREDIT -->
+<div id="dev-credit">
+  <div class="dev-avatar">I</div>
+  <div class="dev-text">
+    <div class="dev-by">Powered by</div>
+    <div class="dev-name">IBRATECH</div>
+    <div class="dev-phone">Digital Solutions · <a href="tel:0544823484">0544823484</a></div>
+  </div>
+  <a href="https://wa.me/233544823484" class="dev-wa-btn" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TUNDE OYE MODICIOUS</div>
+  <div class="footer-meta">WONIM TUNDE? · SRC PRESIDENT 2026 · KNUST</div>
+  <nav class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a>
+    <a href="manifesto.html">Manifesto</a><a href="rebirth.html">REBIRTH</a>
+    <a href="gallery.html">Gallery</a><a href="media.html">Media</a>
+    <a href="join.html">Join</a><a href="contact.html">Contact</a>
+  </nav>
+  <p class="footer-copy">© 2026 Tunde Oye Modicious Campaign · All Rights Reserved · KNUST SRC President Aspirant</p>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a id="wa-float" href="https://wa.me/233530895680?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20Tunde's%20campaign" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="chatbot.js"></script>
+<script>
+  /* Loader */
+  window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1900));
+
+  /* Nav scroll */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+
+  /* Hamburger */
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('open'));
+
+  /* Scroll Reveal */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* FAQ Accordion */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* Quick message form → WhatsApp */
+  function sendMsg() {
+    const name    = document.getElementById('qf-name').value.trim();
+    const phone   = document.getElementById('qf-phone').value.trim();
+    const subject = document.getElementById('qf-subject').value;
+    const msg     = document.getElementById('qf-msg').value.trim();
+    if (!msg) { alert('Please write a message before sending.'); return; }
+    const text = [
+      `Hello Tunde's Campaign Team,`,
+      ``,
+      name    ? `👤 Name: ${name}` : '',
+      phone   ? `📞 Phone: ${phone}` : '',
+      subject ? `📌 Subject: ${subject}` : '',
+      ``,
+      `💬 Message:`,
+      msg,
+      ``,
+      `#REBIRTH #WONIM_TUNDE #KNUST_SRC_2026`
+    ].filter(Boolean).join('\n');
+    window.open(`https://wa.me/233530895680?text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+</body>
+</html>

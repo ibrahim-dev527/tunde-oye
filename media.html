@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media — Tunde Oye Modicious | KNUST SRC 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--maroon:#8B1A1A;--maroon-d:#6B0F0F;--maroon-l:#B22222;--gold:#D4AF37;--gold-l:#F4C842;--white:#FFFFFF;--off-white:#FAF8F4;--black:#111;--gray:#555;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--black);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes lP{0%,100%{opacity:1}50%{opacity:.4}}
+
+    #loader{position:fixed;inset:0;background:var(--maroon-d);display:flex;align-items:center;justify-content:center;z-index:99998;transition:opacity .6s,visibility .6s;}
+    #loader.hidden{opacity:0;visibility:hidden;}
+    .loader-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(50px,12vw,110px);color:var(--gold);letter-spacing:6px;animation:lP 1.4s ease-in-out infinite;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;transition:background .4s,box-shadow .4s;}
+    nav.scrolled{background:rgba(107,15,15,.97);backdrop-filter:blur(12px);box-shadow:0 4px 30px rgba(0,0,0,.3);}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);letter-spacing:3px;}
+    .nav-logo span{color:white;}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+    .nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.85);transition:color .2s;position:relative;}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s;}
+    .nav-links a:hover{color:var(--gold);}.nav-links a:hover::after{width:100%;}
+    .nav-cta{background:var(--gold)!important;color:var(--maroon-d)!important;padding:8px 20px;border-radius:4px;font-weight:700!important;}.nav-cta::after{display:none!important;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+    .hamburger span{display:block;width:26px;height:2.5px;background:white;border-radius:2px;}
+    .mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:var(--maroon-d);padding:20px 5%;flex-direction:column;z-index:899;}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+
+    /* Hero */
+    #page-hero{min-height:52vh;background:linear-gradient(to bottom,rgba(107,15,15,.92),rgba(107,15,15,.78)),url('images/media-bg.jpg') center/cover no-repeat;background-color:var(--maroon-d);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 60px;position:relative;overflow:hidden;}
+    #page-hero::before{content:'MEDIA';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,22vw,260px);color:rgba(255,255,255,.03);letter-spacing:12px;pointer-events:none;}
+    .ph-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;animation:fadeUp .8s ease .3s both;}
+    .ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,12vw,130px);color:white;letter-spacing:4px;line-height:.9;animation:fadeUp .8s ease .5s both;}
+    .ph-title .gold{color:var(--gold);}
+    .ph-sub{font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;color:rgba(255,255,255,.6);margin-top:14px;animation:fadeUp .8s ease .7s both;}
+
+    section{padding:80px 5%;}
+    .container{max-width:1100px;margin:0 auto;}
+    .section-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--maroon);border:1.5px solid var(--maroon);padding:4px 14px;border-radius:3px;margin-bottom:16px;}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,68px);line-height:.95;letter-spacing:2px;}
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── Featured Video ── */
+    #featured-video{background:var(--off-white);}
+    .fv-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;}
+    /* Video placeholder — replace with actual <iframe> or <video> */
+    .video-player-ph{
+      background:var(--maroon-d);
+      border-radius:12px;
+      aspect-ratio:16/9;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:16px;position:relative;overflow:hidden;cursor:pointer;
+      transition:transform .3s;
+    }
+    .video-player-ph:hover{transform:scale(1.01);}
+    .video-player-ph::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,26,26,.3),transparent);}
+    .play-btn{width:72px;height:72px;background:rgba(212,175,55,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:background .2s,transform .2s;}
+    .play-btn:hover{background:var(--gold-l);transform:scale(1.1);}
+    .play-btn svg{margin-left:4px;}
+    .video-ph-label{font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);position:relative;z-index:1;}
+    .video-ph-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:2px;position:relative;z-index:1;}
+    .fv-info .section-title{margin-bottom:16px;}
+    .fv-info p{font-size:16px;line-height:1.8;color:var(--gray);margin-bottom:14px;}
+    .fv-info strong{color:var(--black);}
+    .fv-meta{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap;}
+    .fv-meta-item{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--gray);display:flex;align-items:center;gap:6px;}
+    .fv-meta-item .dot{color:var(--gold);}
+
+    /* ── Video Grid ── */
+    #video-grid-sec{background:white;}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:36px;}
+    .video-card{background:var(--off-white);border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+    .video-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
+    .vc-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--maroon),var(--maroon-d));position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    /* Replace with: <img src="images/thumb.jpg" alt="Video thumbnail" style="width:100%;height:100%;object-fit:cover"/> */
+    .vc-thumb-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;}
+    .vc-thumb-ph svg{opacity:.25;}
+    .vc-thumb-ph span{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+    .vc-play{position:absolute;width:48px;height:48px;background:rgba(212,175,55,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
+    .vc-thumb:hover .vc-play{background:var(--gold-l);transform:scale(1.1);}
+    .vc-duration{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.7);color:white;font-size:12px;padding:2px 7px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;}
+    .vc-cat-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--maroon-d);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 9px;border-radius:3px;}
+    .vc-body{padding:18px;}
+    .vc-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--black);margin-bottom:6px;}
+    .vc-desc{font-size:13px;color:var(--gray);line-height:1.6;}
+    .vc-status{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;padding:3px 10px;border-radius:3px;}
+    .status-soon{background:rgba(212,175,55,.15);color:var(--gold);}
+    .status-live{background:rgba(139,26,26,.12);color:var(--maroon);}
+
+    /* ── Social Media Embeds ── */
+    #social-sec{background:var(--maroon-d);}
+    #social-sec .section-tag{color:var(--gold);border-color:var(--gold);}
+    #social-sec .section-title{color:white;margin-bottom:12px;}
+    #social-sec .intro{color:rgba(255,255,255,.6);max-width:560px;line-height:1.7;margin-bottom:40px;font-size:16px;}
+    .socials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+    .social-card{background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:28px 22px;text-align:center;transition:all .3s;cursor:pointer;}
+    .social-card:hover{background:rgba(255,255,255,.13);border-color:var(--gold);transform:translateY(-4px);}
+    .sc-icon{font-size:38px;margin-bottom:12px;}
+    .sc-platform{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);letter-spacing:2px;}
+    .sc-handle{font-family:'Barlow Condensed',sans-serif;font-size:15px;color:rgba(255,255,255,.6);margin:4px 0;}
+    .sc-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.5;margin-top:8px;}
+    .sc-btn{display:inline-block;margin-top:14px;background:var(--gold);color:var(--maroon-d);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border-radius:4px;transition:background .2s;}
+    .sc-btn:hover{background:var(--gold-l);}
+
+    /* ── Press / Media Mentions ── */
+    #press{background:var(--off-white);}
+    .press-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px;}
+    .press-card{background:white;border-radius:10px;padding:24px;border-left:4px solid var(--gold);box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s;}
+    .press-card:hover{transform:translateY(-3px);}
+    .pc-outlet{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+    .pc-headline{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--black);margin:8px 0;line-height:1.2;}
+    .pc-desc{font-size:14px;color:var(--gray);line-height:1.6;}
+    .pc-status{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:rgba(212,175,55,.15);color:var(--maroon);padding:3px 10px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;}
+
+    /* Subscribe */
+    #subscribe{background:linear-gradient(135deg,var(--gold),var(--gold-l));text-align:center;padding:80px 5%;}
+    .sub-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,7vw,80px);color:var(--maroon-d);letter-spacing:3px;}
+    .sub-desc{font-size:17px;color:var(--maroon-d);opacity:.75;max-width:480px;margin:16px auto 32px;line-height:1.6;}
+    .sub-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+    .sub-link{background:var(--maroon-d);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 28px;border-radius:4px;display:inline-flex;align-items:center;gap:8px;transition:all .25s;}
+    .sub-link:hover{background:var(--maroon-l);transform:translateY(-2px);}
+
+    #whatsapp-float{position:fixed;bottom:96px;right:24px;z-index:888;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);animation:waBounce 3s ease-in-out infinite;}
+    @keyframes waBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    #developer-credit{background:#1a1a1a;padding:24px 5%;display:flex;align-items:center;gap:20px;justify-content:center;flex-wrap:wrap;}
+    .dev-ph{width:46px;height:46px;border-radius:50%;background:var(--maroon);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:16px;}
+    .dev-info .dl{font-size:10px;color:#888;letter-spacing:2px;text-transform:uppercase;}
+    .dev-info .dn{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:white;}
+    .dev-info .dc{font-size:13px;color:#aaa;}.dev-info .dc a{color:var(--gold);}
+    .dev-wa{background:#25D366;color:white;font-size:13px;font-weight:600;padding:8px 18px;border-radius:4px;display:inline-flex;align-items:center;gap:6px;}
+    footer{background:var(--maroon-d);color:rgba(255,255,255,.6);text-align:center;padding:36px 5%;}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:4px;margin-bottom:10px;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin:16px 0;}
+    .footer-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+    .footer-links a:hover{color:var(--gold);}
+    .footer-copy{font-size:12px;}
+
+    @media(max-width:900px){.fv-wrap{grid-template-columns:1fr;}}
+    @media(max-width:640px){.nav-links{display:none;}.hamburger{display:flex;}section{padding:60px 5%;}}
+  </style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-text">MEDIA</div></div>
+
+<nav id="main-nav">
+  <div class="nav-logo">TUNDE <span>OYE</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="manifesto.html">Manifesto</a></li><li><a href="rebirth.html">REBIRTH</a></li>
+    <li><a href="gallery.html">Gallery</a></li><li><a href="media.html">Media</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="join.html" class="nav-cta">Join Movement</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+  <a href="rebirth.html">REBIRTH</a><a href="gallery.html">Gallery</a><a href="media.html">Media</a>
+  <a href="contact.html">Contact</a><a href="join.html" style="color:var(--gold)">★ Join</a>
+</nav>
+
+<section id="page-hero">
+  <div class="ph-eyebrow">Campaign Media Hub</div>
+  <h1 class="ph-title">MEDIA <span class="gold">&amp;</span> PRESS</h1>
+  <div class="ph-sub">Videos · Interviews · Social Media · Press Coverage</div>
+</section>
+
+<!-- Featured Video -->
+<section id="featured-video">
+  <div class="container">
+    <div class="fv-wrap">
+      <div class="reveal">
+        <!--
+          REPLACE THIS BLOCK with an actual video embed:
+          Option 1 (YouTube): <iframe width="100%" style="aspect-ratio:16/9;border-radius:12px;border:none" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+          Option 2 (Local video): <video controls style="width:100%;border-radius:12px"><source src="videos/campaign.mp4" type="video/mp4"/></video>
+        -->
+        <div class="video-player-ph" id="featured-ph">
+          <div class="play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="video-ph-label">Featured Campaign Video</div>
+          <div class="video-ph-title">WONIM TUNDE? — Official Campaign Launch</div>
+        </div>
+      </div>
+      <div class="fv-info reveal" style="transition-delay:.2s">
+        <div class="section-tag">Featured</div>
+        <h2 class="section-title">CAMPAIGN <span style="color:var(--maroon)">LAUNCH</span><br>VIDEO</h2>
+        <p>Watch Tunde Oye Modicious officially declare his candidacy for KNUST SRC President 2026 and unveil the <strong>REBIRTH agenda</strong> to the student body.</p>
+        <p>The campaign video captures Tunde's passion, vision, and unwavering commitment to transforming student governance at KNUST.</p>
+        <div class="fv-meta">
+          <div class="fv-meta-item"><span class="dot">●</span> Campaign Launch 2026</div>
+          <div class="fv-meta-item"><span class="dot">●</span> KNUST Campus</div>
+          <div class="fv-meta-item"><span class="dot">●</span> Full HD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Grid -->
+<section id="video-grid-sec">
+  <div class="container">
+    <div class="section-tag">All Videos</div>
+    <h2 class="section-title">CAMPAIGN <span style="color:var(--maroon)">VIDEOS</span></h2>
+    <div class="video-grid">
+
+      <!-- Video 1 -->
+      <div class="video-card reveal">
+        <div class="vc-thumb">
+          <!--
+            REPLACE WITH ACTUAL THUMBNAIL:
+            <img src="images/thumb1.jpg" alt="Video thumbnail" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/>
+          -->
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">2:45</div>
+          <div class="vc-cat-badge">Campaign</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">WONIM TUNDE? — Official Declaration</div>
+          <div class="vc-desc">Tunde officially declares his intention to contest for KNUST SRC President 2026 and announces the REBIRTH agenda.</div>
+          <span class="vc-status status-live">● Available</span>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-card reveal" style="transition-delay:.1s">
+        <div class="vc-thumb">
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">Coming Soon</div>
+          <div class="vc-cat-badge">Manifesto</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">The REBIRTH Manifesto Explained</div>
+          <div class="vc-desc">Tunde breaks down all 5 pillars of the REBIRTH agenda — Academic Excellence, Welfare, Digital, Transparency, and Opportunities.</div>
+          <span class="vc-status status-soon">⏳ Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-card reveal" style="transition-delay:.2s">
+        <div class="vc-thumb">
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">Coming Soon</div>
+          <div class="vc-cat-badge">Story</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">Son of the Sun — Tunde's Story</div>
+          <div class="vc-desc">A personal documentary-style video exploring who Tunde is, where he comes from, and why he's the right person to lead KNUST's SRC.</div>
+          <span class="vc-status status-soon">⏳ Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="video-card reveal" style="transition-delay:.3s">
+        <div class="vc-thumb">
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">Coming Soon</div>
+          <div class="vc-cat-badge">Students</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">KNUST Students Speak — Why Tunde?</div>
+          <div class="vc-desc">Students from across KNUST halls and departments share why they believe in Tunde's vision for the SRC presidency.</div>
+          <span class="vc-status status-soon">⏳ Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Video 5 -->
+      <div class="video-card reveal" style="transition-delay:.1s">
+        <div class="vc-thumb">
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">Coming Soon</div>
+          <div class="vc-cat-badge">Campaign</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">Campaign Highlights — REBIRTH in Motion</div>
+          <div class="vc-desc">A behind-the-scenes look at the REBIRTH campaign — from community visits to rallies, posters, and student interactions.</div>
+          <span class="vc-status status-soon">⏳ Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Video 6 -->
+      <div class="video-card reveal" style="transition-delay:.2s">
+        <div class="vc-thumb">
+          <div class="vc-thumb-ph">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            <span>Video Thumbnail</span>
+          </div>
+          <div class="vc-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--maroon-d)"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vc-duration">Coming Soon</div>
+          <div class="vc-cat-badge">Vision</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-title">100-Day Plan — What to Expect First</div>
+          <div class="vc-desc">Tunde lays out in detail what will happen in the first 100 days of his SRC presidency — specific actions, specific timelines.</div>
+          <span class="vc-status status-soon">⏳ Coming Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Social Media Embeds -->
+<section id="social-sec">
+  <div class="container">
+    <div class="section-tag">Follow the Campaign</div>
+    <h2 class="section-title">FOLLOW <span style="color:var(--gold)">TUNDE</span><br>ONLINE</h2>
+    <p class="intro">Stay up to date with Tunde's campaign. Follow, share, and be part of the REBIRTH movement across all platforms.</p>
+
+    <div class="socials-grid">
+      <a href="https://www.tiktok.com/@your_tunde" target="_blank" rel="noopener" class="social-card reveal">
+        <div class="sc-icon">🎵</div>
+        <div class="sc-platform">TikTok</div>
+        <div class="sc-handle">@your_tunde</div>
+        <div class="sc-desc">Campaign videos, behind-the-scenes content, and fun moments from the REBIRTH movement.</div>
+        <div class="sc-btn">Follow →</div>
+      </a>
+      <a href="https://x.com/oyemodicious" target="_blank" rel="noopener" class="social-card reveal" style="transition-delay:.1s">
+        <div class="sc-icon">🐦</div>
+        <div class="sc-platform">X (Twitter)</div>
+        <div class="sc-handle">@oyemodicious</div>
+        <div class="sc-desc">Tunde's thoughts, campaign updates, student governance discussions, and manifesto highlights.</div>
+        <div class="sc-btn">Follow →</div>
+      </a>
+      <a href="https://www.facebook.com/share/1CQvA4C7SB" target="_blank" rel="noopener" class="social-card reveal" style="transition-delay:.2s">
+        <div class="sc-icon">📘</div>
+        <div class="sc-platform">Facebook</div>
+        <div class="sc-handle">Tunde Oye Modicious</div>
+        <div class="sc-desc">Campaign events, community posts, live discussions, and the latest REBIRTH news on Facebook.</div>
+        <div class="sc-btn">Like Page →</div>
+      </a>
+      <a href="https://snapchat.com/t/qAl3kTMd" target="_blank" rel="noopener" class="social-card reveal" style="transition-delay:.3s">
+        <div class="sc-icon">👻</div>
+        <div class="sc-platform">Snapchat</div>
+        <div class="sc-handle">@your_tunde</div>
+        <div class="sc-desc">Daily stories, campus visits, and an exclusive look into the REBIRTH campaign from the inside.</div>
+        <div class="sc-btn">Add →</div>
+      </a>
+      <a href="https://www.linkedin.com/in/tunde-modicious-oye" target="_blank" rel="noopener" class="social-card reveal" style="transition-delay:.4s">
+        <div class="sc-icon">💼</div>
+        <div class="sc-platform">LinkedIn</div>
+        <div class="sc-handle">Tunde Modicious Oye</div>
+        <div class="sc-desc">Tunde's professional profile, leadership insights, and academic governance discussions on LinkedIn.</div>
+        <div class="sc-btn">Connect →</div>
+      </a>
+      <a href="https://wa.me/233530895680" target="_blank" rel="noopener" class="social-card reveal" style="transition-delay:.5s">
+        <div class="sc-icon">📱</div>
+        <div class="sc-platform">WhatsApp</div>
+        <div class="sc-handle">0530895680</div>
+        <div class="sc-desc">Direct access to the campaign team. Message us for partnership, media inquiries, or to join the movement.</div>
+        <div class="sc-btn">Chat Now →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Press -->
+<section id="press">
+  <div class="container">
+    <div class="section-tag">Press &amp; Coverage</div>
+    <h2 class="section-title">MEDIA <span style="color:var(--maroon)">COVERAGE</span></h2>
+    <div class="press-grid">
+      <div class="press-card reveal">
+        <div class="pc-outlet">KNUST Campus Radio</div>
+        <div class="pc-headline">"Tunde Modicious Declares for SRC Presidency with Bold REBIRTH Agenda"</div>
+        <div class="pc-desc">Campus radio coverage of Tunde's official campaign declaration and REBIRTH manifesto launch.</div>
+        <span class="pc-status">Coverage Pending</span>
+      </div>
+      <div class="press-card reveal" style="transition-delay:.1s">
+        <div class="pc-outlet">Student Newspaper</div>
+        <div class="pc-headline">"Who is Tunde? The Son of the Sun Making Waves in KNUST Politics"</div>
+        <div class="pc-desc">An in-depth profile on Tunde Oye Modicious and what sets his candidacy apart from others.</div>
+        <span class="pc-status">Interview Scheduled</span>
+      </div>
+      <div class="press-card reveal" style="transition-delay:.2s">
+        <div class="pc-outlet">Campus Blog</div>
+        <div class="pc-headline">"5 Reasons Why KNUST Students Are Backing the REBIRTH Movement"</div>
+        <div class="pc-desc">Student-written analysis of Tunde's manifesto and what it means for daily campus life at KNUST.</div>
+        <span class="pc-status">In Preparation</span>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:14px;color:var(--gray)">
+      📧 For media enquiries and press interviews, contact via
+      <a href="https://wa.me/233530895680" style="color:var(--maroon);font-weight:700">WhatsApp: 0530895680</a>
+    </p>
+  </div>
+</section>
+
+<!-- Subscribe / Follow CTA -->
+<section id="subscribe" class="reveal">
+  <div class="sub-title">FOLLOW THE<br>REBIRTH</div>
+  <p class="sub-desc">Join the movement on social media and never miss a campaign update, event, or manifesto discussion.</p>
+  <div class="sub-links">
+    <a href="https://www.tiktok.com/@your_tunde" class="sub-link" target="_blank" rel="noopener">🎵 TikTok</a>
+    <a href="https://x.com/oyemodicious" class="sub-link" target="_blank" rel="noopener">🐦 X / Twitter</a>
+    <a href="https://www.facebook.com/share/1CQvA4C7SB" class="sub-link" target="_blank" rel="noopener">📘 Facebook</a>
+    <a href="https://wa.me/233530895680" class="sub-link" target="_blank" rel="noopener">📱 WhatsApp</a>
+  </div>
+</section>
+
+<div id="developer-credit">
+  <div class="dev-ph">I</div>
+  <div class="dev-info"><div class="dl">Powered by</div><div class="dn">IBRATECH</div><div class="dc">Digital Solutions · <a href="tel:0544823484">0544823484</a></div></div>
+  <a href="https://wa.me/233544823484" class="dev-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+<footer>
+  <div class="footer-logo">TUNDE OYE MODICIOUS</div>
+  <nav class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a><a href="rebirth.html">REBIRTH</a><a href="gallery.html">Gallery</a><a href="media.html">Media</a><a href="join.html">Join</a><a href="contact.html">Contact</a></nav>
+  <p class="footer-copy">© 2026 Tunde Oye Modicious Campaign · KNUST SRC President Aspirant</p>
+</footer>
+
+<a id="whatsapp-float" href="https://wa.me/233530895680?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20Tunde's%20campaign" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="chatbot.js"></script>
+<script>
+  window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hidden'),1800));
+  const nav=document.getElementById('main-nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+  nav.classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('open'));
+  const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
