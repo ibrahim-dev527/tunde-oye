@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manifesto — Coming Soon | Tunde Oye Modicious KNUST SRC 2026</title>
-  <meta name="description" content="Tunde Oye Modicious' full manifesto is being prepared and will be released to all KNUST students very soon. REBIRTH is coming."/>
+  <title>The Manifesto — Tunde Oye Modicious KNUST SRC 2026</title>
+  <meta name="description" content="The full REBIRTH manifesto of Tunde Oye Modicious and Kwakye Bright Amoasi — 8 policy pillars for KNUST students covering academics, welfare, security, sanitation, entrepreneurship, sports, WiFi, and communication."/>
 
   <!-- ── FAVICON ── -->
   <link rel="icon" type="image/jpeg" href="tunde1.jpg"/>
   <link rel="apple-touch-icon" href="tunde1.jpg"/>
 
   <!-- ── OPEN GRAPH ── -->
-  <meta property="og:title"       content="Manifesto — Coming Soon | Tunde Oye Modicious"/>
-  <meta property="og:description" content="Tunde's full REBIRTH manifesto is being finalized and will drop very soon. Stay tuned. WONIM TUNDE?"/>
+  <meta property="og:title"       content="The Manifesto — Tunde Oye Modicious"/>
+  <meta property="og:description" content="8 policy pillars for the REBIRTH of KNUST student governance. Read the full manifesto. WONIM TUNDE?"/>
   <meta property="og:image"       content="tunde1.jpg"/>
   <meta property="og:url"         content="manifesto.html"/>
   <meta property="og:type"        content="website"/>
   <meta name="twitter:card"       content="summary_large_image"/>
-  <meta name="twitter:title"      content="Manifesto — Coming Soon | Tunde Oye Modicious"/>
-  <meta name="twitter:description" content="Tunde's full REBIRTH manifesto is being finalized and will drop very soon."/>
+  <meta name="twitter:title"      content="The Manifesto — Tunde Oye Modicious"/>
+  <meta name="twitter:description" content="8 policy pillars for the REBIRTH of KNUST student governance. Read the full manifesto."/>
   <meta name="twitter:image"      content="tunde1.jpg"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -273,6 +273,97 @@
     .exp-card:hover .exp-card-link { border-color:var(--gold); }
 
     /* ============================================================
+       MANIFESTO HERO
+    ============================================================ */
+    #m-hero {
+      min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:130px 5% 60px; position:relative; overflow:hidden;
+    }
+    #m-hero .cs-ring, #m-hero .cs-glow { }
+    .m-eyebrow {
+      font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700;
+      letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:16px;
+      opacity:0; animation:fadeUp .8s ease .2s forwards; position:relative; z-index:2;
+    }
+    .m-title {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,13vw,130px);
+      color:white; letter-spacing:4px; line-height:.88;
+      opacity:0; animation:fadeUp .9s ease .4s forwards; position:relative; z-index:2;
+    }
+    .m-title .g { color:var(--gold); }
+    .m-subtitle {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(20px,4.2vw,38px);
+      color:rgba(255,255,255,.5); letter-spacing:3px; margin-top:10px;
+      opacity:0; animation:fadeUp .8s ease .55s forwards; position:relative; z-index:2;
+    }
+    .m-divider {
+      width:60px; height:2px; background:linear-gradient(90deg,var(--gold),var(--gold-l));
+      border-radius:2px; margin:26px auto; opacity:0; animation:fadeUp .8s ease .7s forwards;
+      position:relative; z-index:2;
+    }
+    .m-intro {
+      font-size:17px; color:rgba(255,255,255,.65); line-height:1.85; max-width:660px;
+      margin:0 auto; opacity:0; animation:fadeUp .8s ease .85s forwards; position:relative; z-index:2;
+    }
+    .m-intro strong { color:var(--gold); }
+    .m-authors {
+      margin-top:26px; font-family:'Barlow Condensed',sans-serif; font-size:14px;
+      letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4);
+      opacity:0; animation:fadeUp .8s ease 1s forwards; position:relative; z-index:2;
+    }
+    .m-authors span { color:var(--gold); }
+
+    /* ============================================================
+       POLICY ACCORDION
+    ============================================================ */
+    #policies { padding:20px 5% 90px; position:relative; z-index:2; }
+    .pol-wrap { max-width:880px; margin:0 auto; }
+    .pol-item {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      border-radius:14px; margin-bottom:16px; overflow:hidden;
+      transition:border-color .25s, background .25s;
+    }
+    .pol-item[open] { border-color:rgba(212,175,55,.45); background:rgba(255,255,255,.07); }
+    .pol-item summary {
+      list-style:none; cursor:pointer; padding:22px 24px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .pol-item summary::-webkit-details-marker { display:none; }
+    .pol-letter {
+      flex-shrink:0; width:42px; height:42px; border-radius:10px;
+      background:linear-gradient(135deg, rgba(212,175,55,.25), rgba(212,175,55,.08));
+      border:1.5px solid rgba(212,175,55,.5);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--gold);
+    }
+    .pol-head { flex:1; }
+    .pol-title {
+      font-family:'Barlow Condensed',sans-serif; font-size:19px; font-weight:700;
+      letter-spacing:.5px; color:white; text-transform:uppercase;
+    }
+    .pol-purpose-line { font-size:13px; color:rgba(255,255,255,.45); margin-top:3px; }
+    .pol-arrow {
+      flex-shrink:0; width:26px; height:26px; border-radius:50%;
+      border:1.5px solid rgba(212,175,55,.5); color:var(--gold);
+      display:flex; align-items:center; justify-content:center; font-size:14px;
+      transition:transform .3s;
+    }
+    .pol-item[open] .pol-arrow { transform:rotate(45deg); }
+    .pol-body { padding:0 24px 26px 82px; }
+    .pol-body p { font-size:14.5px; color:rgba(255,255,255,.68); line-height:1.75; margin-bottom:14px; }
+    .pol-body p:last-child { margin-bottom:0; }
+    .pol-list { list-style:none; }
+    .pol-list li {
+      position:relative; padding-left:20px; font-size:14.5px;
+      color:rgba(255,255,255,.7); line-height:1.7; margin-bottom:10px;
+    }
+    .pol-list li:last-child { margin-bottom:0; }
+    .pol-list li::before {
+      content:'✦'; position:absolute; left:0; top:1px; color:var(--gold); font-size:12px;
+    }
+    .pol-list li strong { color:white; }
+
+    /* ============================================================
        FLOATING WHATSAPP
     ============================================================ */
     #wa-float {
@@ -322,6 +413,10 @@
       .exp-grid { grid-template-columns:1fr; }
       .cs-notify { padding:22px 20px; }
       #explore { padding:60px 5%; }
+      #m-hero { padding:110px 6% 40px; }
+      .pol-item summary { padding:18px; gap:12px; }
+      .pol-body { padding:0 18px 22px 18px; }
+      .pol-title { font-size:16px; }
     }
   </style>
 </head>
@@ -362,10 +457,9 @@
 </nav>
 
 <!-- ============================================================
-     COMING SOON — FULL SCREEN
+     MANIFESTO HERO
 ============================================================ -->
-<section id="coming-soon">
-  <!-- Decorative pulse rings -->
+<section id="m-hero">
   <div class="cs-ring"></div>
   <div class="cs-ring"></div>
   <div class="cs-ring"></div>
@@ -373,73 +467,212 @@
   <div class="cs-glow"></div>
   <div class="cs-bg-text" aria-hidden="true">MANIFESTO</div>
 
-  <div class="cs-content">
-    <!-- Lock icon -->
-    <div class="cs-lock" aria-hidden="true">🔒</div>
+  <div class="m-eyebrow">Tunde Oye Modicious · SRC President 2026</div>
+  <h1 class="m-title">THE <span class="g">MANIFESTO</span></h1>
+  <div class="m-subtitle">REBIRTH — A POLICY BLUEPRINT</div>
+  <div class="m-divider"></div>
+  <p class="m-intro">
+    This manifesto is the working document behind REBIRTH — <strong>eight policy
+    pillars</strong> built around what KNUST students actually need: stronger
+    academics, real welfare support, safer campuses and hostels, a cleaner
+    environment, room to build businesses, better sports pathways, reliable
+    internet, and a direct line between course reps and the SRC.
+    <br/><br/>
+    Every pillar below carries the same commitment — action over rhetoric,
+    with clear ownership behind each promise.
+  </p>
+  <div class="m-authors">Presented by <span>Tunde Modicious Oye</span> &amp; <span>Kwakye Bright Amoasi</span></div>
+</section>
 
-    <div class="cs-eyebrow">Tunde Oye Modicious · SRC President 2026</div>
-    <h1 class="cs-title">THE <span class="g">MANIFESTO</span></h1>
-    <div class="cs-subtitle">IS COMING SOON</div>
-    <div class="cs-divider"></div>
+<!-- ============================================================
+     POLICY ACCORDION
+============================================================ -->
+<section id="policies">
+  <div class="pol-wrap">
 
-    <p class="cs-message">
-      Tunde's full manifesto is currently being finalized and will be
-      released to all KNUST students very soon.
-      <br/><br/>
-      <strong>Something powerful is being prepared.</strong>
-      The REBIRTH agenda will be unveiled in full — with detailed plans,
-      timelines, and a commitment to every single student at KNUST.
-      <br/><br/>
-      Stay close. This one is worth the wait.
-    </p>
+    <details class="pol-item" open>
+      <summary>
+        <div class="pol-letter">A</div>
+        <div class="pol-head">
+          <div class="pol-title">Academic Resource &amp; Assessment Policy</div>
+          <div class="pol-purpose-line">Study zones, laptop access, and fair examinations</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to enhancing the student learning environment by creating functional study spaces and providing necessary technological resources — while upholding academic integrity through stronger examination supervision.</p>
+        <ul class="pol-list">
+          <li><strong>Study Zones:</strong> Convert underutilised sitting areas into designated study zones, sheltered for year-round use and equipped with marker boards for collaborative work.</li>
+          <li><strong>Laptop Access:</strong> Station laptop computers at all faculty libraries and hall study areas so every student has equitable access to digital research tools and the internet during operating hours.</li>
+          <li><strong>Invigilator Assessment:</strong> Implement a formal examination supervisory system with mandatory invigilator assessments, ensuring every exam is conducted with integrity and fairness.</li>
+        </ul>
+      </div>
+    </details>
 
-    <!-- WhatsApp notify box -->
-    <div class="cs-notify">
-      <div class="cn-label">Get Notified First</div>
-      <p class="cn-text">
-        Want to be the first to read the manifesto the moment it drops?
-        Send us a message on WhatsApp and we'll notify you personally when it goes live.
-      </p>
-      <a href="https://wa.me/233530895680?text=Hello%2C%20please%20notify%20me%20when%20Tunde's%20manifesto%20is%20released%20%F0%9F%93%84"
-         class="cn-wa-btn" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Notify Me on WhatsApp
-      </a>
-    </div>
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">B</div>
+        <div class="pol-head">
+          <div class="pol-title">The SRC Cares — Student Support &amp; Welfare</div>
+          <div class="pol-purpose-line">Financial relief, laptops, and food support for needy students</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>A framework for comprehensive student support — mitigating financial hardship, providing emergency relief, and meeting basic nutritional and technological needs, coordinated with the Vice Chancellor's Office and the Directorate of Student Affairs.</p>
+        <ul class="pol-list">
+          <li><strong>Sonsol Project Liaison:</strong> Strengthen the Vice Chancellor's Sonsol Project through added SRC support, targeting at least 50 additional laptops for needy students.</li>
+          <li><strong>SRC Foundation — Emergency Relief:</strong> Immediate support for students affected by hostel fires, accidents, floods, or other disasters.</li>
+          <li><strong>SRC Foundation — Tuition Support:</strong> Fund tuition fees for at least two students from each of the six Colleges every academic year.</li>
+          <li><strong>Food Bank Initiative:</strong> Expand supply volume and streamline distribution for consistent nutritional support to less privileged students.</li>
+          <li><strong>Final Year Project Incentives:</strong> Targeted relief for final-year project work, following a six-year rotation across Colleges for equitable distribution.</li>
+          <li><strong>Oversight:</strong> The Foundation Board will be chaired by the Deputy Registrar of Welfare at the Directorate of Students' Affairs, managing the fund with transparency and accountability.</li>
+        </ul>
+      </div>
+    </details>
 
-    <!-- Status indicator -->
-    <div class="cs-status">
-      <div class="status-dot"></div>
-      Manifesto in preparation — dropping soon
-    </div>
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">C</div>
+        <div class="pol-head">
+          <div class="pol-title">Academic Security &amp; Safety Policy</div>
+          <div class="pol-purpose-line">Off-campus security, patrols, lighting, and awareness</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to protecting students and staff by enhancing security visibility, mobility, and communication — mitigating risks in high-density areas on and off campus, especially during exams.</p>
+        <ul class="pol-list">
+          <li><strong>Off-Campus Collaboration:</strong> Work with University Administration to increase police visibility in off-campus residential areas, with intensified surveillance during exam periods.</li>
+          <li><strong>Security Mobility:</strong> Provide university security with at least two dedicated bicycles or motorbikes for swift response times and effective patrols.</li>
+          <li><strong>Awareness Campaigns:</strong> Hall-to-hall engagements with Hall Presidents, off-campus outreach with local MPs, and bulk digital alerts with UITS and the University Relations Office.</li>
+          <li><strong>Lighting Infrastructure:</strong> A dedicated fund for replacing damaged street lights, prioritising high-traffic off-campus routes and residential areas.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">D</div>
+        <div class="pol-head">
+          <div class="pol-title">Sanitation &amp; Environmental Stewardship</div>
+          <div class="pol-purpose-line">Clean campus, flood prevention, community responsibility</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to promoting environmental stewardship and physical well-being — keeping campus clean, reducing regional flood risk, and engaging students in national sanitation efforts.</p>
+        <ul class="pol-list">
+          <li><strong>Internal Maintenance:</strong> Lead periodic campus cleaning exercises that double as opportunities for physical activity and community engagement.</li>
+          <li><strong>Flood Prevention:</strong> Coordinate clean-up exercises around Tech Junction and other high-risk drainage points to clear debris that contributes to local flooding.</li>
+          <li><strong>Student Involvement:</strong> Actively involve the student body to build a sense of national responsibility toward sanitation.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">E</div>
+        <div class="pol-head">
+          <div class="pol-title">Entrepreneurship &amp; Innovation Hub</div>
+          <div class="pol-purpose-line">Incubation space, mentorship, funding, and IP protection</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to creating a supportive environment for student entrepreneurs — the resources, mentorship, and financial frameworks needed to turn ideas into viable businesses.</p>
+        <ul class="pol-list">
+          <li><strong>Innovation Hubs:</strong> Establish Incubation Centres with high-speed internet, meeting rooms, and basic office equipment.</li>
+          <li><strong>Mentorship:</strong> Partner with local business leaders and alumni on business registration, financial management, and marketing.</li>
+          <li><strong>TRACHTECH Competition:</strong> An annual competition offering seed funding from a dedicated SRC Innovation Fund, with external investors invited.</li>
+          <li><strong>IP Protection:</strong> Innovations developed solely by a student using university resources remain that student's property, unless a separate shared-commercial agreement is made.</li>
+          <li><strong>Student Spotlight:</strong> Use official SRC platforms to spotlight students with exceptional entrepreneurial skills.</li>
+          <li><strong>Ownership:</strong> The Director of Innovation runs day-to-day operations and IP agreements; the SRC Financial Secretary manages the Innovation Fund; the University Relations Office promotes student startups externally.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">F</div>
+        <div class="pol-head">
+          <div class="pol-title">Sports &amp; Recreation Policy</div>
+          <div class="pol-purpose-line">A pathway to professional football and the Deans' Cup</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to building talent pathways for student-athletes and fostering cooperation between students and administration through competitive sports.</p>
+        <ul class="pol-list">
+          <li><strong>Kumasi Asante Kotoko Partnership:</strong> A formal pathway for university talent into the club's youth team, the Otumfuo Osei Tutu Team, with potential for national team selection.</li>
+          <li><strong>The Deans' Cup:</strong> An annual interdisciplinary tournament honouring the Dean of Students and directorates for their cooperation with the student front.</li>
+          <li><strong>Ownership:</strong> The SRC Sports Secretary coordinates the Deans' Cup and athlete rosters; the SRC President's office maintains the Kotoko partnership.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">G</div>
+        <div class="pol-head">
+          <div class="pol-title">WiFi Extension &amp; Proliferation</div>
+          <div class="pol-purpose-line">Internet access that follows students beyond the classroom</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>We commit to improving and extending WiFi coverage from campus to shuttles and nearby hostels, recognising that learning today happens far beyond the classroom.</p>
+        <ul class="pol-list">
+          <li><strong>Shuttle Extension:</strong> Work tirelessly toward extending WiFi service to university shuttles, so research, remote entrepreneurship, and everyday academic tools remain accessible on the move.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="pol-item">
+      <summary>
+        <div class="pol-letter">H</div>
+        <div class="pol-head">
+          <div class="pol-title">The People's SRC Policy <span style="opacity:.6;font-size:13px">(Wei De3 Y3De3 Mu)</span></div>
+          <div class="pol-purpose-line">Closing the communication gap between reps and leadership</div>
+        </div>
+        <div class="pol-arrow">+</div>
+      </summary>
+      <div class="pol-body">
+        <p>A policy to eliminate the communication gap, increase transparency, and foster inclusivity within the student body — applying to all elected and appointed course reps, electoral commissioners, and the SRC.</p>
+        <ul class="pol-list">
+          <li><strong>The SRC Desk:</strong> A dedicated hotline and platform created exclusively for course reps to escalate urgent classroom grievances directly to SRC leadership.</li>
+        </ul>
+      </div>
+    </details>
+
   </div>
 </section>
 
 <!-- TICKER STRIP -->
 <div id="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="hi">COMING SOON</span><span>✦</span>
+    <span class="hi">8 POLICY PILLARS</span><span>✦</span>
     <span>WONIM TUNDE?</span><span>✦</span>
     <span class="hi">REBIRTH 2026</span><span>✦</span>
-    <span>THE MANIFESTO IS LOADING</span><span>✦</span>
+    <span>ACTION OVER RHETORIC</span><span>✦</span>
     <span class="hi">KNUST SRC PRESIDENT</span><span>✦</span>
-    <span>STAY TUNED</span><span>✦</span>
+    <span>THE MANIFESTO IS LIVE</span><span>✦</span>
     <!-- Duplicate for seamless loop -->
-    <span class="hi">COMING SOON</span><span>✦</span>
+    <span class="hi">8 POLICY PILLARS</span><span>✦</span>
     <span>WONIM TUNDE?</span><span>✦</span>
     <span class="hi">REBIRTH 2026</span><span>✦</span>
-    <span>THE MANIFESTO IS LOADING</span><span>✦</span>
+    <span>ACTION OVER RHETORIC</span><span>✦</span>
     <span class="hi">KNUST SRC PRESIDENT</span><span>✦</span>
-    <span>STAY TUNED</span><span>✦</span>
+    <span>THE MANIFESTO IS LIVE</span><span>✦</span>
   </div>
 </div>
 
 <!-- EXPLORE OTHER PAGES -->
 <section id="explore">
   <div class="exp-wrap">
-    <div class="exp-tag">While You Wait</div>
+    <div class="exp-tag">Keep Exploring</div>
     <h2 class="exp-title">EXPLORE THE CAMPAIGN</h2>
-    <p class="exp-sub">The manifesto is coming — but there is plenty to discover about Tunde and the REBIRTH movement right now.</p>
+    <p class="exp-sub">You've read the manifesto — here's where to go next to learn more about Tunde and the REBIRTH movement.</p>
     <div class="exp-grid">
       <a href="about.html" class="exp-card">
         <div class="exp-card-icon">👤</div>
@@ -471,11 +704,11 @@
         <div class="exp-card-desc">Reach the REBIRTH campaign team directly on WhatsApp or any social media platform.</div>
         <div class="exp-card-link">Get in Touch →</div>
       </a>
-      <a href="https://wa.me/233530895680?text=Hello%2C%20please%20notify%20me%20when%20Tunde's%20manifesto%20is%20released" target="_blank" rel="noopener" class="exp-card">
-        <div class="exp-card-icon">🔔</div>
-        <div class="exp-card-title">Get Notified</div>
-        <div class="exp-card-desc">Message us on WhatsApp to be the very first student to receive the manifesto when it drops.</div>
-        <div class="exp-card-link">Notify Me →</div>
+      <a href="https://wa.me/233530895680?text=Hello%2C%20I%20read%20the%20manifesto%20and%20have%20a%20question%20or%20some%20feedback" target="_blank" rel="noopener" class="exp-card">
+        <div class="exp-card-icon">💬</div>
+        <div class="exp-card-title">Share Feedback</div>
+        <div class="exp-card-desc">Read a pillar you want to ask about? Message the campaign team directly on WhatsApp.</div>
+        <div class="exp-card-link">Message Us →</div>
       </a>
     </div>
   </div>
